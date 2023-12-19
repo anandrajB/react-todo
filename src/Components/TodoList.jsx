@@ -11,7 +11,7 @@ function TodoList({no , data , display , setData}) {
     return (<div>
         <div>
             {data}
-            <button onClick={() => delete_data(no)}>&#9747;</button>
+            <button className='pl-10' onClick={() => delete_data(no)}>&#9747;</button>
         </div>
     </div>);
 }

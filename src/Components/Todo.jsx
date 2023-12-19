@@ -22,6 +22,7 @@ function Todo() {
     }
 
     useEffect (() => {
+        // when page gets a reload handle it
         setData(localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : [] );
     },[])
 
