@@ -19,15 +19,15 @@ function Todo() {
   }
 
 
-  useEffect(
-    () => {
-        localStorage.getItem('todos') ? setData(JSON.parse(localStorage.getItem('todos'))) : setData([]);
-    },[]
-  )
+    useEffect (() => {
+        setData(localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : [] );
+    },[])
 
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(datas));
-  },[datas])
+    useEffect(() => {
+        setTimeout(() => {
+            localStorage.setItem('data', JSON.stringify(datas));
+        }, 100); 
+    }, [datas]);
 
 
   return (
@@ -39,9 +39,18 @@ function Todo() {
 
             <button onClick={()=> addTodo()}> Add Todo</button>
         </div>
+        <div>
+            {datas.map(
+                (item,index) => {
+                    return <p key = {index}>{item.data}</p>
+                }
+            )}
+        </div>
       </div>
     </div>
   );
 }
 
 export default Todo;
+
+
