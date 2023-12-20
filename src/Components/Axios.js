@@ -1,43 +1,43 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import combineData from '../utils/Helper';
 
 const ChatListData = async () => {
   try {
-    const token = 'token 33972f1252e6b082704a985b5e601a54ac2f5f7f';
+    const token = 'token 9041fe31da21afc33efb133887a373ebc96e8f89';
     Cookies.set('authToken', token);
+
     const response = await axios.get('https://finflo-test-v2-uikte.ondigitalocean.app/api-auth/user/chat/', {
-      headers: {
-        Authorization: token,
-      },
+      headers: { Authorization: token },
     });
-    const combinedData = [];
+
+    const baseData = response.data?.data?.[0].chat_users;
     let index = 0;
-    // combine counter party user
-    response.data?.data?.[0].chat_users.counterparty_user.forEach(
-        (counterparty ) => {
-        combinedData.push(
-            {
-            id : index++,
-            name : counterparty.party_name,
-            users : counterparty.users,
-            }
-        )
-        }
-    )
 
-    // Combine bank users
-    response.data.data[0].chat_users.bank_user.forEach((bank ) => {
-        combinedData.push({
-        id : index++,
-        name: bank.bank_name,
-        users: bank.users
-        });
-    });
-
-    return combinedData;
-
+    // Combine counter party user
+    return [
+      ...combineData(
+        baseData?.counterparty_user,
+        () => index++,
+        (counterparty) => counterparty.party_name,
+        (counterparty) => counterparty.users
+      ),
+      ...combineData(
+        baseData?.bank_user,
+        () => index++,
+        (bank) => bank.bank_name,
+        (bank) => bank.users
+      ),
+      ...combineData(
+        baseData?.buyer_user,
+        () => index++,
+        (buyer) => buyer.party_name,
+        (buyer) => buyer.users
+      ),
+    ];
   } catch (error) {
     console.error('Error fetching data:', error);
+    throw error;
   }
 };
 
