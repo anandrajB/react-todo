@@ -4,7 +4,7 @@ import UserList from './Components/UserList'
 const App = () => {
   return (
     <div >
-      <h1 className='text-3xl'>test data</h1>
+      <p className='text-3xl font-bold'>kredichat</p>
       <UserList/>
     </div>
   )

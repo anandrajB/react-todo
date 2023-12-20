@@ -50,14 +50,14 @@ const UserList = () => {
       </select>
 
       <label>Select a User:</label>
-      {/* <select className='w-auto' >
+      <select className='w-auto' >
         <option value="">Select User</option>
         {users.map((item, index) => (
           <option key={index} value={item}>
-            {item.users}
+            {item}
           </option>
         ))}
-      </select> */}
+      </select>
 
     </div>
   );
