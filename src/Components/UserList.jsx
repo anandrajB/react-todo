@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import ChatListData from '../utils/Axios';
 import { addData } from '../utils/slice';
 import { useDispatch, useSelector } from 'react-redux';
+import Button from './Button';
 
 
 
@@ -78,6 +79,7 @@ const UserList = () => {
           </option>
         ))}
       </select>
+      <Button shouldRenderButton={false} />
     </div>
   );
 };
