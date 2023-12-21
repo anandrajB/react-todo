@@ -1,7 +1,9 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import combineData from './helper';
-import BASE_URL from './base';
+import combineData from '../utils/helper';
+import url from './url';
+import { useDispatch } from 'react-redux';
+
 
 const ChatListData = async () => {
   try {
@@ -9,15 +11,17 @@ const ChatListData = async () => {
 
     Cookies.set('authToken', token);
 
-    const response = await axios.get(`https://${BASE_URL}/api-auth/user/chat/`, {
+    const response = await axios.get(`https://${url.BASE_URL}/api-auth/user/chat/`, {
       headers: { Authorization: token },
     });
 
+    const Email = response.data?.data?.[0].email
+  
     const baseData = response.data?.data?.[0].chat_users;
     let index = 0;
 
     // Combine users and party
-    return [
+    const chatUsersData =  [
       ...combineData(
         baseData?.counterparty_user,
         () => index++,
@@ -37,6 +41,8 @@ const ChatListData = async () => {
         (buyer) => buyer.users
       ),
     ];
+    
+    return [Email, chatUsersData];
   } catch (error) {
     console.error('Error fetching data:', error);
     throw error;

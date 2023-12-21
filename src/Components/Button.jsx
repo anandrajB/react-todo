@@ -1,15 +1,18 @@
-import React from 'react'
+import React from 'react';
 
 const Button = ({ shouldRenderButton }) => {
-    return (
-      <div>
-        {shouldRenderButton ? (
-          <button>Chat</button>
-        ) : (
-          null
-        )}
-      </div>
-    );
-  };
-  
-  export default Button;
+  return (
+    <div>
+      {shouldRenderButton ? (
+        <button
+          type="button"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+          Chat
+        </button>
+      ) : null}
+    </div>
+  );
+};
+
+export default Button;

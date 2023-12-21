@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import ChatListData from '../utils/Axios';
-import { addData } from '../utils/slice';
+import { addEmail} from '../utils/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from './Button';
 
@@ -11,34 +11,33 @@ const UserList = () => {
   const [users, setUsers] = useState([]);
   const [data, setData] = useState([]);
   const [party, setParty] = useState();
-  const [chatuser, setChatUser] = useState([]);
+  const [renderbutton ,  setRenderButton] = useState(false);
+  
+  
   const dispatch = useDispatch();
 
   const resp  = useSelector(
-    (state) => state.baseData
+    (state) => state.addEmail
   )
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await ChatListData();
-        console.log(response);
-        dispatch(addData(response));
+        const [email , response] = await ChatListData();
+        console.log("the email is " , email);
+        dispatch(addEmail(email));
         setData(response);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
     fetchData();
   }, []);
 
   const getPartyUsers = (party_name) => {
     const selectedParty = data.find((item) => item.name === party_name);
     console.log('Selected party data:', selectedParty);
-    
-    console.log('the dispatch is ' ,resp);
     setUsers(selectedParty?.users || []);
   };
 
@@ -51,7 +50,8 @@ const UserList = () => {
 
   const selectUser = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
-    setChatUser(selectedOptions.filter((item) => item));
+    // setChatUser(selectedOptions.filter((item) => item));
+    setRenderButton(selectedOptions.some((item) => item !== ""));
   };
 
   return (
@@ -79,7 +79,7 @@ const UserList = () => {
           </option>
         ))}
       </select>
-      <Button shouldRenderButton={false} />
+      <Button shouldRenderButton={renderbutton} />
     </div>
   );
 };
