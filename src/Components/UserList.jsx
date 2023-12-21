@@ -16,18 +16,15 @@ const UserList = () => {
   
   const dispatch = useDispatch();
 
-  const resp  = useSelector(
-    (state) => state.baseData['email']
-  )
-
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [email , response] = await ChatListData();
+        console.log("the email is" , email)
         dispatch(addEmail(email));
         setData(response);
-      } catch (error) {
+      } catch (error) {ssx
         console.error('Error fetching data:', error);
       }
     };
@@ -36,21 +33,17 @@ const UserList = () => {
 
   const getPartyUsers = (party_name) => {
     const selectedParty = data.find((item) => item.name === party_name);
-    console.log('Selected party data:', selectedParty);
     setUsers(selectedParty?.users || []);
   };
 
   const selectParty = (event) => {
     const selectedPartyName = event.target?.value || '';
-    console.log('Selected party name:', selectedPartyName);
     setParty(selectedPartyName);
-    console.log("the selected email is " ,resp);
     getPartyUsers(selectedPartyName);
   };
 
   const selectUser = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
-    // setChatUser(selectedOptions.filter((item) => item));
     setRenderButton(selectedOptions.some((item) => item !== ""));
   };
 
