@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import ChatListData from './Axios';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [data , setData] = useState([]);
   const [party, setParty] = useState();
+  const [chatuser , setChatUser] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,12 +36,17 @@ const UserList = () => {
     getPartyUsers(selectedPartyName);
   };
 
+  const selectUser = (event) => {
+    const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
+    setChatUser(selectedOptions.filter(item => item));
+  };
+
 
   return (
     <div>
       <label>Select a Name:</label>
-      <select className='w-auto' value ={party} onChange={selectParty}>
-        <option value="">Select Party</option>
+      <select className='w-auto' value ={party}  onChange={selectParty}>
+       <option value ='' selected disabled hidden>Select Party</option>
         {data.map((item, index) => (
           <option key={index} value={item.name}>
             {item.name}
@@ -50,10 +55,10 @@ const UserList = () => {
       </select>
 
       <label>Select a User:</label>
-      <select className='w-auto' >
-        <option value="">Select User</option>
+      <select className='w-auto' multiple onChange={selectUser}>
+        <option value ='' selected disabled hidden>Select User</option>
         {users.map((item, index) => (
-          <option key={index} value={item}>
+          <option key={index} value={item} >
             {item}
           </option>
         ))}
