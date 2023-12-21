@@ -17,7 +17,7 @@ const UserList = () => {
   const dispatch = useDispatch();
 
   const resp  = useSelector(
-    (state) => state.addEmail
+    (state) => state.baseData['email']
   )
 
 
@@ -25,7 +25,6 @@ const UserList = () => {
     const fetchData = async () => {
       try {
         const [email , response] = await ChatListData();
-        console.log("the email is " , email);
         dispatch(addEmail(email));
         setData(response);
       } catch (error) {
@@ -45,6 +44,7 @@ const UserList = () => {
     const selectedPartyName = event.target?.value || '';
     console.log('Selected party name:', selectedPartyName);
     setParty(selectedPartyName);
+    console.log("the selected email is " ,resp);
     getPartyUsers(selectedPartyName);
   };
 
