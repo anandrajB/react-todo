@@ -1,8 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import combineData from '../utils/Helper';
-import BASE_URL from '../utils/Base';
-
+import combineData from './helper';
+import BASE_URL from './base';
 
 const ChatListData = async () => {
   try {

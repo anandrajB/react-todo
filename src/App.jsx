@@ -1,13 +1,19 @@
-import React from 'react'
-import UserList from './Components/UserList'
+import React from 'react';
+import UserList from './Components/UserList';
+import ChatList from './Components/ChatList';
+import { Provider } from 'react-redux';
+import store from './utils/store';
 
 const App = () => {
   return (
-    <div >
-      <p className='text-3xl font-bold'>kredichat</p>
-      <UserList/>
-    </div>
-  )
-}
+    <Provider store={store}>
+      <div>
+        <p className="text-3xl font-bold">kredichat</p>
+        <UserList />
+        <ChatList />
+      </div>
+    </Provider>
+  );
+};
 
-export default App
+export default App;
