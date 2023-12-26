@@ -8,7 +8,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <div>
-        <p className="text-3xl font-bold">kredichat</p>
+        <p className="text-3xl font-bold">kredibot</p>
         <UserList />
         <ChatList />
       </div>

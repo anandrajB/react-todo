@@ -12,6 +12,7 @@ const UserList = () => {
   const [data, setData] = useState([]);
   const [party, setParty] = useState();
   const [renderbutton ,  setRenderButton] = useState(false);
+  const [selecteduser , setSelecteduser] = useState([]);
   
   
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const UserList = () => {
 
   const selectUser = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
+    setSelecteduser(selectedOptions);
     setRenderButton(selectedOptions.some((item) => item !== ""));
   };
 
@@ -62,7 +64,7 @@ const UserList = () => {
       </select>
 
       <label>Select a User:</label>
-      <select className="w-auto" multiple onChange={selectUser}>
+      <select className="w-auto" multiple value={selecteduser} onChange={selectUser}>
         <option value="" selected disabled hidden>
           Select User
         </option>

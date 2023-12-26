@@ -290,7 +290,11 @@ FileReader()
       do_some()
   ```
 - Avoid writing lengthy if else conditions, better to use switch statements .
-
+- Aviod writing one liner condition
+  ```python
+  # don't do this
+  if "some" in val : do_something()
+  ```
 # Container Operations
 
 Container operations in Python involve manipulating and working with iterable objects like lists, tuples, and strings. Employ these practices for effective container operations.
@@ -322,10 +326,10 @@ Container operations in Python involve manipulating and working with iterable ob
 
 # Looping
 
-- Use the range function to generate a sequence of numbers .
-- Use break and continue effectively .
-- Use the zip function to iterate over multiple iterables simultaneously .
-- Use Enumerate for Index and Value based iteration if index required .
+- Use the ```range``` function to generate a sequence of numbers .
+- Use ```break``` and ```continue``` effectively .
+- Use the ```zip``` function to iterate over multiple iterables simultaneously .
+- Use ```Enumerate``` for Index and Value based iteration if index required .
 
 ```python
   data = [12,12,1,2,1212]
