@@ -15,15 +15,15 @@ const UserList = () => {
   const [selecteduser , setSelecteduser] = useState([]);
   
   
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [email , response] = await ChatListData();
+        const [email , party_type , response] = await ChatListData();
         console.log("the email is" , email)
-        dispatch(addEmail(email));
+        // dispatch(addEmail(email));
         setData(response);
       } catch (error) {ssx
         console.error('Error fetching data:', error);
@@ -46,6 +46,7 @@ const UserList = () => {
   const selectUser = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
     setSelecteduser(selectedOptions);
+    console.log(selectedOptions);
     setRenderButton(selectedOptions.some((item) => item !== ""));
   };
 

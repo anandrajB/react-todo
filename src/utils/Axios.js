@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 const ChatListData = async () => {
   try {
-    const token = 'token 97f01da56785c362c31bbfb53a20753ac88bb724';
+    const token = 'token 57536bb41bd58847058f0888e808983cd37d815c';
 
     Cookies.set('authToken', token);
 
@@ -15,9 +15,8 @@ const ChatListData = async () => {
       headers: { Authorization: token },
     });
 
-    const Email = response.data?.data?.[0].email
-  
-    const baseData = response.data?.data?.[0].chat_users;
+    const { email: Email, party_type: PartyType , chat_users : baseData } = response.data?.data?.[0] || {};
+
     let index = 0;
 
     // Combine users and party
@@ -42,7 +41,7 @@ const ChatListData = async () => {
       ),
     ];
     
-    return [Email, chatUsersData];
+    return [Email, PartyType ,chatUsersData];
   } catch (error) {
     console.error('Error fetching data:', error);
     throw error;
