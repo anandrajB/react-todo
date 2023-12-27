@@ -363,7 +363,7 @@ Container operations in Python involve manipulating and working with iterable ob
 # Typing
 
 - Override the methods in child when required
-- You can declare aliases of complex types using TypeAlias
+- You can declare aliases of complex types using ```TypeAlias```
 - Add typing variables if necessary
 
   ```python
@@ -391,7 +391,7 @@ Container operations in Python involve manipulating and working with iterable ob
 # Exception Handling
 
 - Make use of built-in exception classes first .
-- Utilize error in exception like ValueError , TypeError so on .
+- Utilize error in exception like ```ValueError``` , ```TypeError``` so on .
 - Never catch all exception instead leave a ``else`` at the end .
   ```python
     try:
@@ -403,13 +403,11 @@ Container operations in Python involve manipulating and working with iterable ob
     else:
       some3()
   ```
-
-  some3()
 - Minimize the amount of try/except block
 - Introduce contextlib for shorthand syntax .
   ```python
   with contextlib.suppress(Exception):
-  some()
+    some()
   ```
 
 # Conclusion
