@@ -24,5 +24,4 @@ response.data.data[0].chat_users.bank_user.forEach((bank, index) => {
   });
 });
 
-console.log(combinedData);
 return combinedData;

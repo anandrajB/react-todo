@@ -22,8 +22,6 @@ const UserList = () => {
     const fetchData = async () => {
       try {
         const [email , party_type , response] = await ChatListData();
-        console.log("the email is" , email)
-        // dispatch(addEmail(email));
         setData(response);
       } catch (error) {ssx
         console.error('Error fetching data:', error);
@@ -46,7 +44,6 @@ const UserList = () => {
   const selectUser = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
     setSelecteduser(selectedOptions);
-    console.log(selectedOptions);
     setRenderButton(selectedOptions.some((item) => item !== ""));
   };
 

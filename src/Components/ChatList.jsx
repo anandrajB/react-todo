@@ -14,7 +14,6 @@ const ChatList = () => {
 
 
   useEffect(() => {
-    console.log("the email is in chat is " , email)
     const socketUrl = `wss://finflo-chat-klh7t.ondigitalocean.app/conversation/ws?email_id=${email}`
     
     const body = {
@@ -29,8 +28,6 @@ const ChatList = () => {
     });
 
     socket.addEventListener("message", (event) => {
-      console.log("Message from server ", JSON.parse(event.data))
-      console.log(event.data);
       setData(event.data['data']);
     })
     
