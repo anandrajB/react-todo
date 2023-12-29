@@ -22,26 +22,43 @@ const ChatList = () => {
     }
 
     const socket = new WebSocket(socketUrl);
+    
 
     socket.addEventListener('open', (event) => {
       socket.send(JSON.stringify(body));
     });
 
+  
+    const cleanup = () => {
+      socket.removeEventListener('message', handleSocketMessage);
+      socket.close();
+    };
+
+    window.addEventListener('beforeunload', cleanup);
+
+
     socket.addEventListener("message", (event) => {
+      console.log(event.data);
       setData(event.data['data']);
     })
     
+    return () => {
+      window.removeEventListener('beforeunload', cleanup);
+      cleanup();
+    };
+
+
   },[email])
   return (
     <div>
       <h1>this is chat</h1>
-      {/* <ul class="todo-list">
-      {data.map((item, index) => (
+      <ul className="todo-list">
+      {/* {data['data'].map((item, index) => (
           <li class="todo-item">
-            <label key = {index} value={item.data} for="todo1">{item.data}</label>
+            <label key = {index} value={item.id} for="todo1">{item.config_id}</label>
           </li>
-        ))}
-    </ul> */}
+        ))} */}
+    </ul>
     </div>
   )
 }
