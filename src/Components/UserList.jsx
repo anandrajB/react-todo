@@ -9,33 +9,20 @@ import Button from './Button';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
-  const [data, setData] = useState([]);
   const [party, setParty] = useState();
   const [renderbutton ,  setRenderButton] = useState(false);
   const [selecteduser , setSelecteduser] = useState([]);
   
-  
-  // const dispatch = useDispatch();
 
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [email , party_type , response] = await ChatListData();
-        setData(response);
-      } catch (error) {ssx
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData();
-  }, []);
+  const responsedata = useSelector((state) => state.baseData['data'][0]);
 
   const getPartyUsers = (party_name) => {
-    const selectedParty = data.find((item) => item.name === party_name);
+    const selectedParty = responsedata.find((item) => item.name === party_name);
     setUsers(selectedParty?.users || []);
   };
 
   const selectParty = (event) => {
+    
     const selectedPartyName = event.target?.value || '';
     setParty(selectedPartyName);
     getPartyUsers(selectedPartyName);
@@ -54,7 +41,7 @@ const UserList = () => {
         <option value="" selected disabled hidden>
           Select Party
         </option>
-        {data.map((item, index) => (
+        {responsedata.map((item, index) => (
           <option key={index} value={item.name}>
             {item.name}
           </option>

@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 const ChatListData = async () => {
   try {
-    const token = 'token 57536bb41bd58847058f0888e808983cd37d815c';
+    const token = 'token c14881e00103cb3d2e1cc885cc196963cba4d08d';
 
     Cookies.set('authToken', token);
 
