@@ -13,24 +13,24 @@ const UserList = () => {
 
   const dispatch = useDispatch();
 
-  const sender_email = useSelector((state) => state.baseData['email']);
+  const sender_email = useSelector((state : any) => state.baseData['email']);
 
-  const responsedata = useSelector((state) => state.baseData['data'][0]);
+  const responsedata = useSelector((state : any) => state.baseData['data'][0]);
 
   const getPartyUsers = (party_name) => {
-    const selectedParty = responsedata.find((item) => item.name === party_name);
+    const selectedParty = responsedata.find((item : any) => item.name === party_name);
     setUsers(selectedParty?.users || []);
   };
 
-  const selectParty = (event) => {
+  const selectParty = (event : any) => {
     
     const selectedPartyName = event.target?.value || '';
     setParty(selectedPartyName);
     getPartyUsers(selectedPartyName);
   };
 
-  const selectUser = (event) => {
-    const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
+  const selectUser = (event : any) => {
+    const selectedOptions : any = Array.from(event.target.selectedOptions, (option : any) => option.value);
     setSelecteduser(selectedOptions);
     setRenderButton(selectedOptions.some((item) => item !== ""));
     dispatch(setChatUsers([...selectedOptions, sender_email]));
