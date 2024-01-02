@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const ChatList = () => {
-  const [data, setData] = useState([]);
-  const convo_list = useSelector((state) => state.baseData['convo_list'][0]);
+  const [data, setData] = useState<any[]>([]);
+  const convo_list = useSelector((state : any) => state.baseData['convo_list'][0]);
 
 
   useEffect(() => {

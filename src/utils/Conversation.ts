@@ -1,5 +1,5 @@
-const ConversationListData = (email) => {
-    const socketUrl = `wss://finflo-chat-klh7t.ondigitalocean.app/conversation/ws?email_id=${email}`;
+const ConversationListData = (email : string) => {
+    const socketUrl : string = `wss://finflo-chat-klh7t.ondigitalocean.app/conversation/ws?email_id=${email}`;
     
     const body = {
       type: 'CHAT_LIST',
