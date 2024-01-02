@@ -1,11 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import ChatListData from '../utils/Axios';
-import { addEmail} from '../utils/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from './Button';
-
-
+import { setChatUsers } from '../utils/slice';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -13,6 +10,10 @@ const UserList = () => {
   const [renderbutton ,  setRenderButton] = useState(false);
   const [selecteduser , setSelecteduser] = useState([]);
   
+
+  const dispatch = useDispatch();
+
+  const sender_email = useSelector((state) => state.baseData['email']);
 
   const responsedata = useSelector((state) => state.baseData['data'][0]);
 
@@ -32,6 +33,7 @@ const UserList = () => {
     const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
     setSelecteduser(selectedOptions);
     setRenderButton(selectedOptions.some((item) => item !== ""));
+    dispatch(setChatUsers([...selectedOptions, sender_email]));
   };
 
   return (

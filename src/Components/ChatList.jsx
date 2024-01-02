@@ -1,66 +1,30 @@
-import React, { useEffect, useState } from 'react'
-import url from '../utils/url'
-import { useSelector } from 'react-redux'
-import { io } from 'socket.io-client'
-
-
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const ChatList = () => {
-
-  const [data , setData ] = useState([]);
-
-  const email = useSelector((state) => state.baseData['email']);
-
+  const [data, setData] = useState([]);
+  const convo_list = useSelector((state) => state.baseData['convo_list'][0]);
 
 
   useEffect(() => {
-    const socketUrl = `wss://finflo-chat-klh7t.ondigitalocean.app/conversation/ws?email_id=${email}`
-    
-    const body = {
-      "type":"CHAT_LIST",
-      "email": email
-    }
+    setData(convo_list['data']);
+  }, [convo_list]);
 
-    const socket = new WebSocket(socketUrl);
-    
-
-    socket.addEventListener('open', (event) => {
-      socket.send(JSON.stringify(body));
-    });
 
   
-    const cleanup = () => {
-      socket.removeEventListener('message', handleSocketMessage);
-      socket.close();
-    };
 
-    window.addEventListener('beforeunload', cleanup);
-
-
-    socket.addEventListener("message", (event) => {
-      console.log(event.data);
-      setData(event.data['data']);
-    })
-    
-    return () => {
-      window.removeEventListener('beforeunload', cleanup);
-      cleanup();
-    };
-
-
-  },[email])
   return (
+    
     <div>
-      <h1>this is chat</h1>
       <ul className="todo-list">
-      {/* {data['data'].map((item, index) => (
-          <li class="todo-item">
-            <label key = {index} value={item.id} for="todo1">{item.config_id}</label>
+        {data.map((item, index) => (
+          <li className="todo-item" key={index}>
+            <label htmlFor="todo1">{item.config_id}</label>
           </li>
-        ))} */}
-    </ul>
+        ))}
+      </ul>
     </div>
-  )
-}
+  );
+};
 
-export default ChatList
+export default ChatList;

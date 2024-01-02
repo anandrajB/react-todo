@@ -1,11 +1,9 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import combineData from '../utils/helper';
+import combineData from './helper';
 import url from './url';
-import { useDispatch } from 'react-redux';
 
-
-const ChatListData = async () => {
+const ChatlistData = async () => {
   try {
     const token = 'token c14881e00103cb3d2e1cc885cc196963cba4d08d';
 
@@ -15,12 +13,12 @@ const ChatListData = async () => {
       headers: { Authorization: token },
     });
 
-    const { email: Email, party_type: PartyType , chat_users : baseData } = response.data?.data?.[0] || {};
+    const { email: Email, party_type: PartyType, chat_users: baseData } = response.data?.data?.[0] || {};
 
     let index = 0;
 
     // Combine users and party
-    const chatUsersData =  [
+    const chatUsersData = [
       ...combineData(
         baseData?.counterparty_user,
         () => index++,
@@ -40,12 +38,13 @@ const ChatListData = async () => {
         (buyer) => buyer.users
       ),
     ];
-    
-    return [Email, PartyType ,chatUsersData];
+
+    return [Email, PartyType, chatUsersData];
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error fetching Chatlist data:', error);
     throw error;
   }
 };
 
-export default ChatListData;
+
+export default ChatlistData;
