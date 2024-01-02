@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { Provider, useSelector } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import store from './utils/store';
-import { addData, addEmail, addPartyType , addConvoList } from './utils/slice';
+import { addData, addEmail, addPartyType, addConvoList } from './utils/slice';
 import UserList from './Components/UserList';
 import ChatList from './Components/ChatList';
 import { MutatingDots } from 'react-loader-spinner';
 import ChatlistData from './utils/Chatlist';
 import ConversationListData from './utils/Conversation';
-
+import ConvoList from './Components/ConvoList';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [partyType, setPartyType] = useState(null);
-
+  const dispatch = useDispatch();
+  const convo_comp = useSelector((state) => state.baseData['convo_comp']);
+  
   useEffect(() => {
     const fetchEmail = async () => {
       try {
+        console.log(convo_comp);
         const [email, fetchedPartyType, response] = await ChatlistData();
-        store.dispatch(addEmail(email));
-        store.dispatch(addData(response));
-        store.dispatch(addPartyType(fetchedPartyType));
-        store.dispatch(addConvoList(await ConversationListData(email)));
+        dispatch(addEmail(email));
+        dispatch(addData(response));
+        dispatch(addPartyType(fetchedPartyType));
+        // Wait for ConversationListData to resolve before setting partyType
+        const convoListData = await ConversationListData(email);
+        dispatch(addConvoList(convoListData));
         setPartyType(fetchedPartyType);
         setTimeout(() => {
           setIsLoading(false);
@@ -33,17 +38,19 @@ const App = () => {
     fetchEmail();
   }, []);
 
+  
+
   return (
-    <Provider store={store}>
       <div>
+        {/* {chat_comp ? <ConvoList /> : null} */}
         {isLoading ? (
           <MutatingDots
             visible={true}
-            height="100"
-            width="100"
+            height={100}
+            width={100}
             color="#4fa94d"
             secondaryColor="#4fa94d"
-            radius="12.5"
+            radius={12.5}
             ariaLabel="mutating-dots-loading"
           />
         ) : (
@@ -54,7 +61,6 @@ const App = () => {
           </>
         )}
       </div>
-    </Provider>
   );
 };
 

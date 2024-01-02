@@ -1,6 +1,7 @@
 import React from 'react'
 
 const ConvoList = () => {
+  
   return (
     <div>
       <h1> this is a new conversation</h1>
@@ -8,4 +9,4 @@ const ConvoList = () => {
   )
 }
 
-export default ConvoList
+export default ConvoList;
