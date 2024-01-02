@@ -5,7 +5,7 @@ import url from './url';
 
 const ChatlistData = async () => {
   try {
-    const token = 'token c14881e00103cb3d2e1cc885cc196963cba4d08d';
+    const token = 'token 2ef0eedfd498ff4150a5595efeebcbae7847e829';
 
     Cookies.set('authToken', token);
 
