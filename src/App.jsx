@@ -20,7 +20,6 @@ const App = () => {
   useEffect(() => {
     const fetchEmail = async () => {
       try {
-        console.log(convo_comp);
         const [email, fetchedPartyType, response] = await ChatlistData();
         dispatch(addEmail(email));
         dispatch(addData(response));
