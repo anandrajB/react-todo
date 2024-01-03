@@ -5,8 +5,8 @@ import UserList from './Components/UserList';
 import ChatList from './Components/ChatList';
 import { MutatingDots } from 'react-loader-spinner';
 import ChatlistData from './utils/Chatlist';
-import ConversationListData from './utils/Conversation';
 import ConvoList from './Components/ConvoList';
+import CongifurationListData from './utils/Configuration';
 
 const App = ({ token, config_id, base_url }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +18,7 @@ const App = ({ token, config_id, base_url }) => {
     const fetchEmail = async () => {
       try {
         const [email, fetchedPartyType, response] = await ChatlistData(token, base_url);
-        const convoListData = await ConversationListData(email);
+        const convoListData = await CongifurationListData(email);
         dispatch(addEmail(email));
         dispatch(addData(response));
         dispatch(addPartyType(fetchedPartyType));

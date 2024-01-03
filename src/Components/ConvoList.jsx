@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setConvoComp } from '../utils/slice';
 import useSound from 'use-sound';
 import { MessageReceiver, MessageSender } from '../utils/Messager';
+import ConversationListData from '../utils/Conversation';
 
 const ConvoList = ({ config_id }) => {
   const [inputValue, setInputValue] = useState('');
@@ -14,11 +15,16 @@ const ConvoList = ({ config_id }) => {
 
   const email = useSelector((state) => state.baseData['email']);
 
-  const message_receiver = MessageReceiver(config_id, chat_users, currentPage);
-
-  console.log(message_receiver);
-
-  const socketUrl = `wss://finflo-chat-klh7t.ondigitalocean.app/conversation/ws?email_id=${email}`;
+  useEffect(() => {
+    const fetchconversation = async () => {
+      console.log("here")
+      const message_receiver = MessageReceiver(config_id, chat_users, currentPage);
+      console.log(message_receiver);
+      const conversation_data = await ConversationListData(email, message_receiver);
+      console.log(conversation_data);
+    };
+    fetchconversation();
+  }, [setCurretPage]);
 
   const addpage = () => {
     setCurretPage(currentPage + 1);
@@ -48,6 +54,7 @@ const ConvoList = ({ config_id }) => {
     <div>
       <button onClick={ConvoComponent}>Go back</button>
       <h1>This is a new conversation</h1>
+      <button onClick={addpage}>more ..</button>
       <form onSubmit={sendChat}>
         <label>
           <input type="text" name="name" value={inputValue} onChange={handleInputChange} />
