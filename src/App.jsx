@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Provider, useDispatch, useSelector } from 'react-redux';
-import store from './utils/store';
+import { useDispatch, useSelector } from 'react-redux';
 import { addData, addEmail, addPartyType, addConvoList } from './utils/slice';
 import UserList from './Components/UserList';
 import ChatList from './Components/ChatList';
@@ -9,18 +8,16 @@ import ChatlistData from './utils/Chatlist';
 import ConversationListData from './utils/Conversation';
 import ConvoList from './Components/ConvoList';
 
-const App = ({token , config_id , base_url}) => {
+const App = ({ token, config_id, base_url }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [partyType, setPartyType] = useState(null);
   const dispatch = useDispatch();
   const convo_comp = useSelector((state) => state.baseData['convo_comp']);
-  
-
 
   useEffect(() => {
     const fetchEmail = async () => {
       try {
-        const [email, fetchedPartyType, response] = await ChatlistData(token , base_url);
+        const [email, fetchedPartyType, response] = await ChatlistData(token, base_url);
         const convoListData = await ConversationListData(email);
         dispatch(addEmail(email));
         dispatch(addData(response));
@@ -41,7 +38,7 @@ const App = ({token , config_id , base_url}) => {
   return (
     <div>
       {convo_comp ? (
-        <ConvoList config_id = {config_id} />
+        <ConvoList config_id={config_id} />
       ) : isLoading ? (
         <MutatingDots
           visible={true}

@@ -7,9 +7,8 @@ import { setChatUsers } from '../utils/slice';
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [party, setParty] = useState();
-  const [renderbutton ,  setRenderButton] = useState(false);
-  const [selecteduser , setSelecteduser] = useState([]);
-  
+  const [renderbutton, setRenderButton] = useState(false);
+  const [selecteduser, setSelecteduser] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -23,7 +22,6 @@ const UserList = () => {
   };
 
   const selectParty = (event) => {
-    
     const selectedPartyName = event.target?.value || '';
     setParty(selectedPartyName);
     getPartyUsers(selectedPartyName);
@@ -32,7 +30,7 @@ const UserList = () => {
   const selectUser = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
     setSelecteduser(selectedOptions);
-    setRenderButton(selectedOptions.some((item) => item !== ""));
+    setRenderButton(selectedOptions.some((item) => item !== ''));
     dispatch(setChatUsers([...selectedOptions, sender_email]));
   };
 
