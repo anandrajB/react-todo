@@ -1,16 +1,14 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import combineData from './helper';
-import url from './url';
 
-const ChatlistData = async () => {
+const ChatlistData = async (access_token , base_url) => {
   try {
-    const token = 'token af63832480aba330847810051478cb20f0ccd9ce';
 
-    Cookies.set('authToken', token);
-
-    const response = await axios.get(`https://${url.BASE_URL}/api-auth/user/chat/`, {
-      headers: { Authorization: token },
+    Cookies.set('authToken', access_token);
+  
+    const response = await axios.get(`https://${base_url}/api-auth/user/chat/`, {
+      headers: { Authorization: access_token },
     });
 
     const { email: Email, party_type: PartyType, chat_users: baseData } = response.data?.data?.[0] || {};

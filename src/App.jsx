@@ -9,7 +9,7 @@ import ChatlistData from './utils/Chatlist';
 import ConversationListData from './utils/Conversation';
 import ConvoList from './Components/ConvoList';
 
-const App = () => {
+const App = ({token , config_id , base_url}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [partyType, setPartyType] = useState(null);
   const dispatch = useDispatch();
@@ -20,12 +20,11 @@ const App = () => {
   useEffect(() => {
     const fetchEmail = async () => {
       try {
-        const [email, fetchedPartyType, response] = await ChatlistData();
+        const [email, fetchedPartyType, response] = await ChatlistData(token , base_url);
+        const convoListData = await ConversationListData(email);
         dispatch(addEmail(email));
         dispatch(addData(response));
         dispatch(addPartyType(fetchedPartyType));
-        // Wait for ConversationListData to resolve before setting partyType
-        const convoListData = await ConversationListData(email);
         dispatch(addConvoList(convoListData));
         setPartyType(fetchedPartyType);
         setTimeout(() => {
@@ -42,7 +41,7 @@ const App = () => {
   return (
     <div>
       {convo_comp ? (
-        <ConvoList />
+        <ConvoList config_id = {config_id} />
       ) : isLoading ? (
         <MutatingDots
           visible={true}
