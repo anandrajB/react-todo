@@ -18,7 +18,25 @@ const App = ({ token, config_id, base_url }) => {
     const fetchEmail = async () => {
       try {
         const [email, fetchedPartyType, response] = await ChatlistData(token, base_url);
+
+        const socketUrl = `wss://finflo-chat-klh7t.ondigitalocean.app/conversation/ws?email_id=${email}`;
+        const socket = new WebSocket(socketUrl);
+        const body = {
+          type: 'CHAT_LIST',
+          email: email,
+        };
+
+        socket.addEventListener('open', () => {
+          socket.send(JSON.stringify(body));
+        });
+
+        socket.addEventListener("message", event => {
+          console.log("Message from server ", event.data)
+        });
+
+
         const convoListData = await CongifurationListData(email);
+        // console.log(convoListData);
         dispatch(addEmail(email));
         dispatch(addData(response));
         dispatch(addPartyType(fetchedPartyType));
