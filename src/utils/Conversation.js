@@ -1,9 +1,6 @@
 
 const ConversationListData = (email , body) => {
-    console.log(email)
-    console.log(body)
     const socketUrl = `wss://finflo-chat-klh7t.ondigitalocean.app/conversation/ws?email_id=${email}`;
-    console.log(socketUrl)
     return new Promise((resolve) => {
       const socket = new WebSocket(socketUrl);
     
@@ -13,7 +10,6 @@ const ConversationListData = (email , body) => {
   
       const handleSocketMessage = (event) => {
         const data = event.data;
-        console.log(data);
         socket.removeEventListener('message', handleSocketMessage);
         socket.close();
         resolve(JSON.parse(data));

@@ -17,11 +17,8 @@ const ConvoList = ({ config_id }) => {
 
   useEffect(() => {
     const fetchconversation = async () => {
-      console.log("here")
       const message_receiver = MessageReceiver(config_id, chat_users, currentPage);
-      console.log(message_receiver);
       const conversation_data = await ConversationListData(email, message_receiver);
-      console.log(conversation_data);
     };
     fetchconversation();
   }, [setCurretPage]);

@@ -3,13 +3,15 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from './Button';
 import { setChatUsers } from '../utils/slice';
+import { Select } from 'antd';
+
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [party, setParty] = useState();
   const [renderbutton, setRenderButton] = useState(false);
   const [selecteduser, setSelecteduser] = useState([]);
-
+  const { Option } = Select;
   const dispatch = useDispatch();
 
   const sender_email = useSelector((state) => state.baseData['email']);
@@ -22,13 +24,16 @@ const UserList = () => {
   };
 
   const selectParty = (event) => {
-    const selectedPartyName = event.target?.value || '';
+    console.log("the event is" , event)
+    setSelecteduser([]);
+    const selectedPartyName = event || '';
     setParty(selectedPartyName);
     getPartyUsers(selectedPartyName);
   };
 
   const selectUser = (event) => {
-    const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
+    console.log("tthe data is" , event)
+    const selectedOptions = Array.from(event, (option) => option);
     setSelecteduser(selectedOptions);
     setRenderButton(selectedOptions.some((item) => item !== ''));
     dispatch(setChatUsers([...selectedOptions, sender_email]));
@@ -37,28 +42,38 @@ const UserList = () => {
   return (
     <div>
       <label>Select a Name:</label>
-      <select className="w-auto" value={party} onChange={selectParty}>
-        <option value="" selected disabled hidden>
-          Select Party
-        </option>
-        {responsedata.map((item, index) => (
-          <option key={index} value={item.name}>
-            {item.name}
-          </option>
-        ))}
-      </select>
+      <Select
+  className="w-auto"
+  showSearch
+  value={party}
+  placeholder="Select Party"
+  optionFilterProp="children"
+  onChange={selectParty}
+  filterOption={(input, option) =>
+    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+  }
+>
+  {responsedata.map((item, index) => (
+    <Option key={index} value={item.name}>
+      {item.name}
+    </Option>
+  ))}
+</Select>
 
       <label>Select a User:</label>
-      <select className="w-auto" multiple value={selecteduser} onChange={selectUser}>
-        <option value="" selected disabled hidden>
-          Select User
-        </option>
-        {users.map((item, index) => (
-          <option key={index} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
+<Select
+  className="w-100"
+  mode="multiple"
+  placeholder="Select User"
+  value={selecteduser}
+  onChange={selectUser}
+>
+  {users.map((item, index) => (
+    <Option key={index} value={item}>
+      {item}
+    </Option>
+  ))}
+</Select>
       <Button shouldRenderButton={renderbutton} />
     </div>
   );

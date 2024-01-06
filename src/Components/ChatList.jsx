@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Avatar, List } from 'antd';
+
 
 const ChatList = () => {
   const [data, setData] = useState([]);
@@ -16,13 +18,18 @@ const ChatList = () => {
   return (
     
     <div>
-      <ul className="todo-list">
-        {data.map((item, index) => (
-          <li className="todo-item" key={index}>
-            <label htmlFor="todo1">{item.config_id}</label>
-          </li>
-        ))}
-      </ul>
+      <List
+      itemLayout="horizontal"
+      dataSource={data}
+      renderItem={(item, index) => (
+        <List.Item>
+          <List.Item.Meta
+            avatar={<Avatar src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`} />}
+            title={<a href="https://ant.design">{item.members}</a>}
+          />
+        </List.Item>
+      )}
+    />
     </div>
   );
 };
