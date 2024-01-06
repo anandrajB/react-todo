@@ -18,9 +18,10 @@ const App = ({ token, config_id, base_url }) => {
     const fetchEmail = async () => {
       try {
         const [email, fetchedPartyType, response] = await ChatlistData(token, base_url);
-
+        console.log(email, fetchedPartyType, response);
         const socketUrl = `wss://finflo-chat-klh7t.ondigitalocean.app/conversation/ws?email_id=${email}`;
         const socket = new WebSocket(socketUrl);
+        console.log(socket);
         const body = {
           type: 'CHAT_LIST',
           email: email,
@@ -36,15 +37,15 @@ const App = ({ token, config_id, base_url }) => {
 
 
         const convoListData = await CongifurationListData(email);
-        // console.log(convoListData);
+        console.log("the data is" , convoListData);
         dispatch(addEmail(email));
         dispatch(addData(response));
         dispatch(addPartyType(fetchedPartyType));
         dispatch(addConvoList(convoListData));
         setPartyType(fetchedPartyType);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 2000);
+        // setTimeout(() => {
+        //   setIsLoading(false);
+        // }, 2000);
       } catch (error) {
         console.error('Error fetching email:', error);
       }
@@ -55,7 +56,8 @@ const App = ({ token, config_id, base_url }) => {
 
   return (
     <div>
-      {convo_comp ? (
+      {/* <ChatList/> */}
+      {/* {convo_comp ? (
         <ConvoList config_id={config_id} />
       ) : isLoading ? (
         <MutatingDots
@@ -73,7 +75,7 @@ const App = ({ token, config_id, base_url }) => {
           {partyType !== 'BANK' ? <UserList /> : null}
           <ChatList />
         </>
-      )}
+      )} */}
     </div>
   );
 };
