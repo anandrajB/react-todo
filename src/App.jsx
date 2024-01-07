@@ -7,6 +7,7 @@ import { MutatingDots } from 'react-loader-spinner';
 import ChatlistData from './utils/Chatlist';
 import ConvoList from './Components/ConvoList';
 import CongifurationListData from './utils/Configuration';
+import { Typography } from 'antd';
 
 
 
@@ -17,6 +18,7 @@ const App = ({ token, config_id, base_url }) => {
   const convo_comp = useSelector((state) => state.baseData['convo_comp']);
   const [isSlowConnection, setSlowConnection] = useState(false);
 
+  const Title = Typography;
   useEffect(() => {
     const handleNetworkChange = () => {
       const connection =
@@ -51,14 +53,6 @@ const App = ({ token, config_id, base_url }) => {
           email: email,
         };
 
-        socket.addEventListener('open', () => {
-          socket.send(JSON.stringify(body));
-        });
-
-        socket.addEventListener('message', (event) => {
-          console.log('Message from server ', event.data);
-        });
-
         const convoListData = await CongifurationListData(email);
         dispatch(addEmail(email));
         dispatch(addData(response));
@@ -79,12 +73,12 @@ const App = ({ token, config_id, base_url }) => {
       window.removeEventListener('online', handleNetworkChange);
       window.removeEventListener('offline', handleNetworkChange);
     };
-  }, []);
+  }, [convo_comp]);
 
   return (
     <div>
       {convo_comp ? (
-        <ConvoList config_id={config_id} />
+        <ConvoList config_id={config_id} all_users={null} logged_in_email={null}/>
       ) : isLoading ? (
         <MutatingDots
           visible={true}
@@ -97,7 +91,7 @@ const App = ({ token, config_id, base_url }) => {
         />
       ) : (
         <>
-          <p className="text-3xl font-bold">kredibot</p>
+          <Title>Kredibot</Title>
           {partyType !== 'BANK' ? <UserList /> : null}
           <ChatList />
         </>
