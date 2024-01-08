@@ -54,13 +54,13 @@ const App = ({ token, config_id, base_url }) => {
         };
 
         const convoListData = await CongifurationListData(email);
-        console.log("the data is " , convoListData)
-        // dispatch(addEmail(email));
-        // dispatch(addData(response));
-        // dispatch(addPartyType(fetchedPartyType));
-        // dispatch(addConvoList(convoListData));
-        // dispatch(setConfigId(config_id));
-        // setPartyType(fetchedPartyType);
+        console.log("the data is " , convoListData);
+        dispatch(addEmail(email));
+        dispatch(addData(response));
+        dispatch(addPartyType(fetchedPartyType));
+        dispatch(addConvoList(convoListData));
+        dispatch(setConfigId(config_id));
+        setPartyType(fetchedPartyType);
         setTimeout(() => {
           setIsLoading(false);
         }, 2000);
@@ -79,7 +79,7 @@ const App = ({ token, config_id, base_url }) => {
 
   return (
     <div>
-      {/* {convo_comp ? (
+      {convo_comp ? (
         <ConvoList config_id={config_id} all_users={null} logged_in_email={null}/>
       ) : isLoading ? (
         <MutatingDots
@@ -97,7 +97,7 @@ const App = ({ token, config_id, base_url }) => {
           {partyType !== 'BANK' ? <UserList /> : null}
           <ChatList />
         </>
-      )} */}
+      )}
     </div>
   );
 };
