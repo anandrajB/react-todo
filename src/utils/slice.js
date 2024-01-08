@@ -5,6 +5,7 @@ export const baseDataSlice = createSlice({
     initialState: {
       data: [],
       email: '',
+      config_id : '',
       party_type : '',
       convo_list: [],
       chat_users : '',
@@ -28,10 +29,13 @@ export const baseDataSlice = createSlice({
       },
       setConvoComp : (state, action) => {
         state.convo_comp = action.payload
+      },
+      setConfigId : (state, action) => {
+        state.config_id = action.payload;
       }
     },
   });
   
 
-export const { addData , addEmail , addPartyType , addConvoList , setChatUsers ,setConvoComp} = baseDataSlice.actions;
+export const { addData , addEmail , addPartyType , addConvoList , setChatUsers ,setConvoComp , setConfigId} = baseDataSlice.actions;
 export default baseDataSlice.reducer

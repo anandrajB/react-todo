@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addData, addEmail, addPartyType, addConvoList } from './utils/slice';
+import { addData, addEmail, addPartyType, addConvoList, setConfigId } from './utils/slice';
 import UserList from './Components/UserList';
 import ChatList from './Components/ChatList';
 import { MutatingDots } from 'react-loader-spinner';
@@ -12,7 +12,7 @@ import { Typography } from 'antd';
 
 
 const App = ({ token, config_id, base_url }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [partyType, setPartyType] = useState(null);
   const dispatch = useDispatch();
   const convo_comp = useSelector((state) => state.baseData['convo_comp']);
@@ -54,11 +54,13 @@ const App = ({ token, config_id, base_url }) => {
         };
 
         const convoListData = await CongifurationListData(email);
-        dispatch(addEmail(email));
-        dispatch(addData(response));
-        dispatch(addPartyType(fetchedPartyType));
-        dispatch(addConvoList(convoListData));
-        setPartyType(fetchedPartyType);
+        console.log("the data is " , convoListData)
+        // dispatch(addEmail(email));
+        // dispatch(addData(response));
+        // dispatch(addPartyType(fetchedPartyType));
+        // dispatch(addConvoList(convoListData));
+        // dispatch(setConfigId(config_id));
+        // setPartyType(fetchedPartyType);
         setTimeout(() => {
           setIsLoading(false);
         }, 2000);
@@ -77,7 +79,7 @@ const App = ({ token, config_id, base_url }) => {
 
   return (
     <div>
-      {convo_comp ? (
+      {/* {convo_comp ? (
         <ConvoList config_id={config_id} all_users={null} logged_in_email={null}/>
       ) : isLoading ? (
         <MutatingDots
@@ -95,7 +97,7 @@ const App = ({ token, config_id, base_url }) => {
           {partyType !== 'BANK' ? <UserList /> : null}
           <ChatList />
         </>
-      )}
+      )} */}
     </div>
   );
 };

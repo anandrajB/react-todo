@@ -19,6 +19,7 @@ const UserList = () => {
   const responsedata = useSelector((state) => state.baseData['data'][0]);
 
   const getPartyUsers = (party_name) => {
+    console.log(responsedata)
     const selectedParty = responsedata.find((item) => item.name === party_name);
     setUsers(selectedParty?.users || []);
   };

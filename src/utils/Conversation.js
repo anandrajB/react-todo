@@ -9,6 +9,7 @@ const ConversationListData = (email , body) => {
       });
   
       const handleSocketMessage = (event) => {
+        setTimeout(1000);
         const data = event.data;
         socket.removeEventListener('message', handleSocketMessage);
         socket.close();

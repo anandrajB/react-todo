@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Avatar, List } from 'antd';
 import ConvoList from './ConvoList';
+import { setChatUsers, setConfigId, setConvoComp } from '../utils/slice';
 
 
 const ChatList = () => {
   const [data, setData] = useState([]);
-  const [item,setItem] = useState('');
-  const [showcomp , setShowComp] = useState(false);
   const convo_list = useSelector((state) => state.baseData['convo_list'][0]);
 
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setData(convo_list['data']);
@@ -18,17 +18,16 @@ const ChatList = () => {
 
 
   const handleTitleClick = (item) => {
-    setShowComp(true);
-    setItem(item);
+    console.log(item)
+    dispatch(setConfigId(item.config_id));
+    dispatch(setConvoComp(true));
+    dispatch(setChatUsers(item.members));
   };
   
 
   return (
     
     <div>
-      {showcomp ? (
-        <ConvoList config_id={item['config_id']} all_users={item.members} logged_in_email={"krediq@gmail.com"}/>
-      ) :(
         <List
       itemLayout="horizontal"
       dataSource={data}
@@ -42,7 +41,7 @@ const ChatList = () => {
         </List.Item>
       )}
     />
-      )}
+
     </div>
   );
 };

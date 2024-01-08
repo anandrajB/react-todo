@@ -14,6 +14,7 @@ const CongifurationListData = (email) => {
     });
 
     const handleSocketMessage = (event) => {
+      console.log("message from server" , event.data)
       const data = event.data;
       socket.removeEventListener('message', handleSocketMessage);
       socket.close();
