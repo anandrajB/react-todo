@@ -1,4 +1,4 @@
-const ConversationListData = (email, body) => {
+const ChatMessage = (email, body) => {
   const socketUrl = `wss://finflo-chat-klh7t.ondigitalocean.app/conversation/ws?email_id=${email}`;
   return new Promise((resolve) => {
     const socket = new WebSocket(socketUrl);
@@ -27,4 +27,4 @@ const ConversationListData = (email, body) => {
   });
 };
 
-export default ConversationListData;
+export default ChatMessage;

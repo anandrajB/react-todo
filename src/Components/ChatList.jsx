@@ -34,7 +34,7 @@ const ChatList = () => {
       renderItem={(item, index) => (
         <List.Item>
           <List.Item.Meta
-            avatar={<Avatar src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`} />}
+            avatar={<Avatar src={`https://api.dicebear.com/7.x/shapes/svg?seed=${index}`} /> }
             title={<a onClick={() => handleTitleClick(item)}>{item.config_id}</a>}
             description={<p>{item.members.join(',')}</p>}
           />

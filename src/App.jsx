@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addData, addEmail, addPartyType, addConvoList , setConfigId } from './utils/slice';
+import { addData, addEmail, addPartyType, addConvoList, setConfigId } from './utils/slice';
 import UserList from './Components/UserList';
 import ChatList from './Components/ChatList';
 import { MutatingDots } from 'react-loader-spinner';
 import ChatlistData from './utils/Chatlist';
 import ConvoList from './Components/ConvoList';
 import CongifurationListData from './utils/Configuration';
-import { Typography} from 'antd';
+import { Typography } from 'antd';
 
-
-const App = ({ token, config_id, base_url }) => {
+const App = ({ token, config_id, base_url, party_id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [partyType, setPartyType] = useState(null);
   const dispatch = useDispatch();
@@ -32,10 +31,9 @@ const App = ({ token, config_id, base_url }) => {
           socket.send(JSON.stringify(body));
         });
 
-        socket.addEventListener("message", event => {
-          console.log("Message from server ", event.data)
+        socket.addEventListener('message', (event) => {
+          console.log('Message from server ', event.data);
         });
-
 
         const convoListData = await CongifurationListData(email);
         // console.log(convoListData);
@@ -59,7 +57,7 @@ const App = ({ token, config_id, base_url }) => {
   return (
     <div>
       {convo_comp ? (
-        <ConvoList config_id={config_id} all_users={null} logged_in_email={null}/>
+        <ConvoList config_id={config_id} all_users={null} logged_in_email={null} party_id={party_id} />
       ) : isLoading ? (
         <MutatingDots
           visible={true}
