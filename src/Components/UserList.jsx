@@ -5,7 +5,6 @@ import Button from './Button';
 import { setChatUsers } from '../utils/slice';
 import { Select } from 'antd';
 
-
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [party, setParty] = useState();
@@ -19,13 +18,13 @@ const UserList = () => {
   const responsedata = useSelector((state) => state.baseData['data'][0]);
 
   const getPartyUsers = (party_name) => {
-    console.log(responsedata)
+    console.log(responsedata);
     const selectedParty = responsedata.find((item) => item.name === party_name);
     setUsers(selectedParty?.users || []);
   };
 
   const selectParty = (event) => {
-    console.log("the event is" , event)
+    console.log('the event is', event);
     setSelecteduser([]);
     const selectedPartyName = event || '';
     setParty(selectedPartyName);
@@ -33,7 +32,7 @@ const UserList = () => {
   };
 
   const selectUser = (event) => {
-    console.log("tthe data is" , event)
+    console.log('tthe data is', event);
     const selectedOptions = Array.from(event, (option) => option);
     setSelecteduser(selectedOptions);
     setRenderButton(selectedOptions.some((item) => item !== ''));
@@ -44,37 +43,29 @@ const UserList = () => {
     <div>
       <label>Select a Name:</label>
       <Select
-  className="w-auto"
-  showSearch
-  value={party}
-  placeholder="Select Party"
-  optionFilterProp="children"
-  onChange={selectParty}
-  filterOption={(input, option) =>
-    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-  }
->
-  {responsedata.map((item, index) => (
-    <Option key={index} value={item.name}>
-      {item.name}
-    </Option>
-  ))}
-</Select>
+        className="w-auto"
+        showSearch
+        value={party}
+        placeholder="Select Party"
+        optionFilterProp="children"
+        onChange={selectParty}
+        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+      >
+        {responsedata.map((item, index) => (
+          <Option key={index} value={item.name}>
+            {item.name}
+          </Option>
+        ))}
+      </Select>
 
       <label>Select a User:</label>
-<Select
-  className="w-100"
-  mode="multiple"
-  placeholder="Select User"
-  value={selecteduser}
-  onChange={selectUser}
->
-  {users.map((item, index) => (
-    <Option key={index} value={item}>
-      {item}
-    </Option>
-  ))}
-</Select>
+      <Select className="w-100" mode="multiple" placeholder="Select User" value={selecteduser} onChange={selectUser}>
+        {users.map((item, index) => (
+          <Option key={index} value={item}>
+            {item}
+          </Option>
+        ))}
+      </Select>
       <Button shouldRenderButton={renderbutton} />
     </div>
   );

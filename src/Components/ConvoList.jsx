@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setConvoComp } from '../utils/slice';
 import { MessageReceiver, MessageSender } from '../utils/Messager';
-import ConversationListData from '../utils/Conversation';
 import { MutatingDots } from 'react-loader-spinner';
-import ChatMessage from '../utils/ChatMessage';
+import ChatSocket from '../utils/ChatSocket';
 
 const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
   const [inputValue, setInputValue] = useState('');
@@ -28,7 +27,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
     try {
       const message_receiver = MessageReceiver(config_id, chat_users, currentPage);
       console.log('the message reci', message_receiver);
-      const baseData = await ConversationListData(email, message_receiver);
+      const baseData = await ChatSocket(email, message_receiver);
       console.log('the base data is', baseData);
       console.log('the data is here');
       setConversation(baseData?.data[0]?.message || null);
@@ -57,7 +56,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
   const send_message = async () => {
     console.log('for here');
     const message_sender = MessageSender(config_id, chat_users, party_id, inputValue, email);
-    await ChatMessage(email, message_sender);
+    await ChatSocket(email, message_sender);
     console.log('Before fetchconversation');
     await fetchconversation();
     console.log('After fetchconversation');

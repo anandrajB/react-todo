@@ -6,8 +6,8 @@ import ChatList from './Components/ChatList';
 import { MutatingDots } from 'react-loader-spinner';
 import ChatlistData from './utils/Chatlist';
 import ConvoList from './Components/ConvoList';
-import CongifurationListData from './utils/Configuration';
 import { Typography } from 'antd';
+import ChatSocket from './utils/ChatSocket';
 
 const App = ({ token, config_id, base_url, party_id }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,7 +35,7 @@ const App = ({ token, config_id, base_url, party_id }) => {
           console.log('Message from server ', event.data);
         });
 
-        const convoListData = await CongifurationListData(email);
+        const convoListData = await ChatSocket(email, body);
         // console.log(convoListData);
         dispatch(addEmail(email));
         dispatch(addData(response));

@@ -1,11 +1,5 @@
-const CongifurationListData = (email) => {
+const ChatSocket = (email, body) => {
   const socketUrl = `wss://finflo-chat-klh7t.ondigitalocean.app/conversation/ws?email_id=${email}`;
-  
-  const body = {
-    type: 'CHAT_LIST',
-    email: email,
-  };
-
   return new Promise((resolve) => {
     const socket = new WebSocket(socketUrl);
 
@@ -14,7 +8,7 @@ const CongifurationListData = (email) => {
     });
 
     const handleSocketMessage = (event) => {
-      console.log("message from server" , event.data)
+      setTimeout(1000);
       const data = event.data;
       socket.removeEventListener('message', handleSocketMessage);
       socket.close();
@@ -33,4 +27,4 @@ const CongifurationListData = (email) => {
   });
 };
 
-export default CongifurationListData;
+export default ChatSocket;

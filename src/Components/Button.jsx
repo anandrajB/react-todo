@@ -2,16 +2,12 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setConvoComp } from '../utils/slice';
 
-
 const Button = ({ shouldRenderButton }) => {
-
-
-
   const dispatch = useDispatch();
 
   const ConvComponent = () => {
     dispatch(setConvoComp(true));
-  }
+  };
 
   return (
     <div>
