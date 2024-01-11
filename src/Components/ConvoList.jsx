@@ -27,7 +27,8 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
     try {
       const message_receiver = MessageReceiver(config_id, chat_users, currentPage);
       console.log('the message reci', message_receiver);
-      const baseData = await ChatSocket(email, message_receiver);
+      console.log('the data is here' , email , message_receiver);
+      const baseData = await ChatSocket("krediq@gmail.com", message_receiver);
       console.log('the base data is', baseData);
       console.log('the data is here');
       setConversation(baseData?.data[0]?.message || null);

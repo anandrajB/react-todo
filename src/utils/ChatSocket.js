@@ -3,7 +3,9 @@ const ChatSocket = (email, body) => {
   return new Promise((resolve) => {
     const socket = new WebSocket(socketUrl);
     console.log("the data is" , socket)
+    console.dir(socket)
     socket.addEventListener('open', () => {
+      console.log("socket is opened now ")
       socket.send(JSON.stringify(body));
     });
 
