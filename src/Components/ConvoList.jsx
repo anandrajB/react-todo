@@ -56,9 +56,10 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
   const send_message = async () => {
     console.log('for here');
     const message_sender = MessageSender(config_id, chat_users, party_id, inputValue, email);
+    console.log("the message is" , message_sender);
     await ChatSocket(email, message_sender);
     console.log('Before fetchconversation');
-    await fetchconversation();
+    fetchconversation();
     console.log('After fetchconversation');
   };
 
