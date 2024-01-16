@@ -27,12 +27,9 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
 
   const fetchconversation = async () => {
     try {
+      console.log("the logged in is " , email)
       const message_receiver = MessageReceiver(config_id, chat_users, currentPage);
-      console.log('the message reci', message_receiver);
-      console.log('the data is here' , email , message_receiver);
-      const baseData = await ChatSocket("krediq@gmail.com", message_receiver);
-      console.log('the base data is', baseData);
-      console.log('the data is here');
+      const baseData = await ChatSocket(email, message_receiver);
       setConversation(baseData?.data[0]?.message || null);
     } catch (error) {
       console.error('Error in fetchconversation:', error);
@@ -74,7 +71,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
     setInputValue('');
     setShouldFetchConversation(true);
   };
-
+  
 
   useEffect(() => {
     if (shouldFetchConversation) {

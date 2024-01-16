@@ -9,7 +9,7 @@ import ConvoList from './Components/ConvoList';
 import { Typography } from 'antd';
 import ChatSocket from './utils/ChatSocket';
 
-const App = ({ token, config_id, base_url, party_id }) => {
+const App = ({ token, config_id, base_url ,  party_id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [partyType, setPartyType] = useState(null);
   const dispatch = useDispatch();
