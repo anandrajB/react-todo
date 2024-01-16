@@ -10,6 +10,8 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
   const [currentPage, setCurretPage] = useState(1);
   const [conversation, setConversation] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [shouldFetchConversation, setShouldFetchConversation] = useState(true);
+  
 
   const dispatch = useDispatch();
   let chat_users, email;
@@ -44,6 +46,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
     fetchconversation();
   }, [currentPage]);
 
+
   const addpage = () => {
     setCurretPage(currentPage + 1);
   };
@@ -55,14 +58,11 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
   };
 
   const send_message = async () => {
-    console.log('for here');
     const message_sender = MessageSender(config_id, chat_users, party_id, inputValue, email);
-    console.log("the message is" , message_sender);
     await ChatSocket(email, message_sender);
-    console.log('Before fetchconversation');
-    fetchconversation();
-    console.log('After fetchconversation');
   };
+
+  
 
   const sendChat = (event) => {
     event.preventDefault();
@@ -72,7 +72,16 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
     }
     send_message();
     setInputValue('');
+    setShouldFetchConversation(true);
   };
+
+
+  useEffect(() => {
+    if (shouldFetchConversation) {
+      fetchconversation();
+      setShouldFetchConversation(false); 
+    }
+  }, [shouldFetchConversation]);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
