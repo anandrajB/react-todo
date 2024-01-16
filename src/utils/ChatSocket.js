@@ -2,10 +2,7 @@ const ChatSocket = (email, body) => {
   const socketUrl = `wss://finflo-chat-klh7t.ondigitalocean.app/conversation/ws?email_id=${email}`;
   return new Promise((resolve) => {
     const socket = new WebSocket(socketUrl);
-    console.log("the data is" , socket)
-    console.dir(socket)
     socket.addEventListener('open', () => {
-      console.log("socket is opened now ")
       socket.send(JSON.stringify(body));
     });
 

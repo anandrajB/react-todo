@@ -18,13 +18,11 @@ const UserList = () => {
   const responsedata = useSelector((state) => state.baseData['data'][0]);
 
   const getPartyUsers = (party_name) => {
-    console.log(responsedata);
     const selectedParty = responsedata.find((item) => item.name === party_name);
     setUsers(selectedParty?.users || []);
   };
 
   const selectParty = (event) => {
-    console.log('the event is', event);
     setSelecteduser([]);
     const selectedPartyName = event || '';
     setParty(selectedPartyName);
@@ -32,7 +30,6 @@ const UserList = () => {
   };
 
   const selectUser = (event) => {
-    console.log('tthe data is', event);
     const selectedOptions = Array.from(event, (option) => option);
     setSelecteduser(selectedOptions);
     setRenderButton(selectedOptions.some((item) => item !== ''));

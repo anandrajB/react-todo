@@ -36,7 +36,6 @@ const App = ({ token, config_id, base_url ,  party_id }) => {
         });
 
         const convoListData = await ChatSocket(email, body);
-        // console.log(convoListData);
         dispatch(addEmail(email));
         dispatch(addData(response));
         dispatch(addPartyType(fetchedPartyType));

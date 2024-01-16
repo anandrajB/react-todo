@@ -27,7 +27,6 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
 
   const fetchconversation = async () => {
     try {
-      console.log("the logged in is " , email)
       const message_receiver = MessageReceiver(config_id, chat_users, currentPage);
       const baseData = await ChatSocket(email, message_receiver);
       setConversation(baseData?.data[0]?.message || null);
@@ -71,7 +70,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
     setInputValue('');
     setShouldFetchConversation(true);
   };
-  
+
 
   useEffect(() => {
     if (shouldFetchConversation) {

@@ -15,7 +15,6 @@ const ChatList = () => {
   }, [convo_list]);
 
   const handleTitleClick = (item) => {
-    console.log(item);
     dispatch(setConfigId(item.config_id));
     dispatch(setConvoComp(true));
     dispatch(setChatUsers(item.members));
