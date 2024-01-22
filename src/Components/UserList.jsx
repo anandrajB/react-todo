@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Button from './Button';
 import { setChatUsers } from '../utils/slice';
 import { Select } from 'antd';
+import ChatButton from './ChatButton';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -63,7 +63,7 @@ const UserList = () => {
           </Option>
         ))}
       </Select>
-      <Button shouldRenderButton={renderbutton} />
+      <ChatButton shouldRenderButton={renderbutton} />
     </div>
   );
 };

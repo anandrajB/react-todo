@@ -64,6 +64,10 @@ const App = ({ token, config_id, base_url, party_id }) => {
 
   return (
     <div>
+      <button class="chatbot-toggler">
+        <span class="material-symbols-outlined">chat</span>
+        <span class="material-symbols-outlined">close</span>
+      </button>
       {convo_comp ? (
         <ConvoList config_id={config_id} all_users={null} logged_in_email={null} party_id={party_id} />
       ) : isLoading ? (
