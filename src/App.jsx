@@ -9,49 +9,58 @@ import ConvoList from './Components/ConvoList';
 import { Typography } from 'antd';
 import ChatSocket from './utils/ChatSocket';
 
-const App = ({ token, config_id, base_url ,  party_id }) => {
+const App = ({ token, config_id, base_url, party_id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [partyType, setPartyType] = useState(null);
   const dispatch = useDispatch();
   const convo_comp = useSelector((state) => state.baseData['convo_comp']);
   const { Title } = Typography;
+
+  const fetchData = async () => {
+    try {
+      const [email, fetchedPartyType, response] = await ChatlistData(token, base_url);
+
+      const socketUrl = `wss://finflo-chat-klh7t.ondigitalocean.app/conversation/ws?email_id=${email}`;
+      const socket = new WebSocket(socketUrl);
+      const body = {
+        type: 'CHAT_LIST',
+        email: email,
+      };
+
+      console.log(body);
+
+      socket.addEventListener('open', () => {
+        socket.send(JSON.stringify(body));
+      });
+
+      socket.addEventListener('message', (event) => {
+        console.log('Message from server ', event.data);
+      });
+
+      const convoListData = await ChatSocket(email, body);
+      dispatch(addEmail(email));
+      dispatch(addData(response));
+      dispatch(addPartyType(fetchedPartyType));
+      dispatch(addConvoList(convoListData));
+      dispatch(setConfigId(config_id));
+      setPartyType(fetchedPartyType);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+    } catch (error) {
+      console.error('Error fetching email:', error);
+    }
+  };
+
   useEffect(() => {
-    const fetchEmail = async () => {
-      try {
-        const [email, fetchedPartyType, response] = await ChatlistData(token, base_url);
-
-        const socketUrl = `wss://finflo-chat-klh7t.ondigitalocean.app/conversation/ws?email_id=${email}`;
-        const socket = new WebSocket(socketUrl);
-        const body = {
-          type: 'CHAT_LIST',
-          email: email,
-        };
-
-        socket.addEventListener('open', () => {
-          socket.send(JSON.stringify(body));
-        });
-
-        socket.addEventListener('message', (event) => {
-          console.log('Message from server ', event.data);
-        });
-
-        const convoListData = await ChatSocket(email, body);
-        dispatch(addEmail(email));
-        dispatch(addData(response));
-        dispatch(addPartyType(fetchedPartyType));
-        dispatch(addConvoList(convoListData));
-        dispatch(setConfigId(config_id));
-        setPartyType(fetchedPartyType);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 2000);
-      } catch (error) {
-        console.error('Error fetching email:', error);
-      }
-    };
-
-    fetchEmail();
+    fetchData();
   }, []);
+
+  useEffect(() => {
+    if (!convo_comp) {
+      fetchData();
+    }
+  }, [convo_comp]);
 
   return (
     <div>

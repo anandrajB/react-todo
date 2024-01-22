@@ -1,31 +1,42 @@
 const ChatSocket = (email, body) => {
   const socketUrl = `wss://finflo-chat-klh7t.ondigitalocean.app/conversation/ws?email_id=${email}`;
-  return new Promise((resolve) => {
+
+  return new Promise((resolve, reject) => {
     const socket = new WebSocket(socketUrl);
-    socket.addEventListener('open', () => {
+
+    const handleSocketOpen = () => {
       socket.send(JSON.stringify(body));
-    });
+    };
 
     const handleSocketMessage = (event) => {
-      try{
-        setTimeout(1000);
-      const data = event.data;
-      socket.removeEventListener('message', handleSocketMessage);
-      socket.close();
-      resolve(JSON.parse(data));
-      }catch(e){
+      try {
+        const data = event.data;
+        socket.removeEventListener('open', handleSocketOpen);
+        socket.removeEventListener('message', handleSocketMessage);
+        resolve(JSON.parse(data));
+        socket.close();
+      } catch (e) {
         console.log(e);
-        console.log("something went wrong");
+        console.log('Something went wrong');
+        reject(e);
       }
     };
 
-    socket.addEventListener('message', handleSocketMessage);
+    const handleSocketError = (errorEvent) => {
+      console.error('WebSocket error:', errorEvent);
+      reject(errorEvent);
+    };
 
     const cleanup = () => {
+      socket.removeEventListener('open', handleSocketOpen);
       socket.removeEventListener('message', handleSocketMessage);
+      socket.removeEventListener('error', handleSocketError);
       socket.close();
-      resolve(null);
     };
+
+    socket.addEventListener('open', handleSocketOpen);
+    socket.addEventListener('message', handleSocketMessage);
+    socket.addEventListener('error', handleSocketError);
 
     window.addEventListener('beforeunload', cleanup);
   });
