@@ -29,6 +29,7 @@ jobs:
             
   DeployProd:
     name: Deploy to Production 
+    needs: [DeployDev]
     runs-on: ubuntu-latest
     environment: 
       name: PRODUCTION
