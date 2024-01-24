@@ -1,0 +1,39 @@
+name: CI + CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Compile
+        run: echo building the app 
+    
+  DeployDev:
+    name: Deploy to Dev
+    needs: [Build]
+    runs-on: ubuntu-latest
+    environment: 
+      name: DEV
+      url: 'http://www.dev.kredibot.com'
+    steps:
+      - name: Deploy
+        run: echo deployed to dev 
+    
+            
+  DeployProd:
+    name: Deploy to Production 
+    runs-on: ubuntu-latest
+    environment: 
+      name: PRODUCTION
+      url: 'http://www.kredibot.com'
+    steps:
+      - name: Deploy
+        run: echo deployed to production
