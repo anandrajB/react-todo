@@ -8,6 +8,7 @@ import ChatlistData from './utils/Chatlist';
 import ConvoList from './Components/ConvoList';
 import { Typography } from 'antd';
 import ChatSocket from './utils/ChatSocket';
+import Chatbot from './Components/Chatbot';
 
 const App = ({ token, config_id, base_url, party_id }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -64,29 +65,8 @@ const App = ({ token, config_id, base_url, party_id }) => {
 
   return (
     <div>
-      <button class="chatbot-toggler">
-        <span class="material-symbols-outlined">chat</span>
-        <span class="material-symbols-outlined">close</span>
-      </button>
-      {convo_comp ? (
-        <ConvoList config_id={config_id} all_users={null} logged_in_email={null} party_id={party_id} />
-      ) : isLoading ? (
-        <MutatingDots
-          visible={true}
-          height={100}
-          width={100}
-          color="#4fa94d"
-          secondaryColor="#4fa94d"
-          radius={12.5}
-          ariaLabel="mutating-dots-loading"
-        />
-      ) : (
-        <>
-          <Title>kredibot </Title>
-          {partyType !== 'BANK' ? <UserList /> : null}
-          <ChatList />
-        </>
-      )}
+      <h1>Your App</h1>
+      <Chatbot />
     </div>
   );
 };
