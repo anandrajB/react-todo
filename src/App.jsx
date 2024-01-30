@@ -65,7 +65,6 @@ const App = ({ token, config_id, base_url, party_id }) => {
 
   const [userMessage, setUserMessage] = useState('');
   const [inputInitHeight, setInputInitHeight] = useState(0);
-  const [chatHistory, setChatHistory] = useState([{ role: 'bot', content: 'Hi there! How can I help you today?' }]);
 
   useEffect(() => {
     setInputInitHeight(document.querySelector('.chat-input textarea').scrollHeight);
@@ -83,8 +82,6 @@ const App = ({ token, config_id, base_url, party_id }) => {
     if (!trimmedMessage) return;
 
     setUserMessage('');
-
-    setChatHistory((prevChatHistory) => [...prevChatHistory, createChatLi(trimmedMessage, 'user')]);
   };
 
   const handleInputChange = (e) => {
