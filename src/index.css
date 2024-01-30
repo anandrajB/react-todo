@@ -61,7 +61,7 @@ body.show-chatbot .chatbot {
   transform: scale(1);
 }
 .chatbot header {
-  padding: 10px 0;
+  padding: 8px 0;
   position: relative;
   text-align: center;
   color: #fff;
@@ -115,6 +115,12 @@ header h2 {
 
 .chatbox a{
   cursor: pointer;
+}
+
+.chatbox .list-item{
+  background-color: rgb(238, 239, 241);
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 .chatbox img{
     width: 30px; 
