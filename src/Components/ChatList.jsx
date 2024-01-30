@@ -9,7 +9,7 @@ const ChatList = () => {
   const convo_list = useSelector((state) => state.baseData['convo_list'][0]);
 
   const dispatch = useDispatch();
-
+  console.log(data);
   useEffect(() => {
     setData(convo_list['data']);
   }, [convo_list]);
@@ -18,23 +18,23 @@ const ChatList = () => {
     dispatch(setConfigId(item.config_id));
     dispatch(setConvoComp(true));
     dispatch(setChatUsers(item.members));
+    console.log(item.members);
   };
 
   return (
-    <div>
-      <List
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item, index) => (
-          <List.Item>
-            <List.Item.Meta
-              avatar={<Avatar src={`https://api.dicebear.com/7.x/shapes/svg?seed=${index}`} />}
-              title={<a onClick={() => handleTitleClick(item)}>{item.config_id}</a>}
-              description={<p>{item.members.join(',')}</p>}
-            />
-          </List.Item>
-        )}
-      />
+    <div className="chatbox">
+      <ul>
+        {data.map((item, index) => (
+          <li key={index}>
+            <div className="list-item">
+              <div className="item-content">
+                <a onClick={() => handleTitleClick(item)}>{item.config_id}</a>
+                <p>{item.members.map((email) => email.split('@')[0]).join(',')}</p>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
