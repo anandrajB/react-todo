@@ -99,25 +99,7 @@ const App = ({ token, config_id, base_url, party_id }) => {
 
   return (
     <div>
-      {convo_comp ? (
-        <ConvoList config_id={config_id} all_users={null} logged_in_email={null} party_id={party_id} />
-      ) : isLoading ? (
-        <MutatingDots
-          visible={true}
-          height={100}
-          width={100}
-          color="#4fa94d"
-          secondaryColor="#4fa94d"
-          radius={12.5}
-          ariaLabel="mutating-dots-loading"
-        />
-      ) : (
-        <>
-          <Title>kredibot </Title>
-          {partyType !== 'BANK' ? <UserList /> : null}
-          <ChatList />
-        </>
-      )}
+
       <button className="chatbot-toggler" onClick={() => document.body.classList.toggle('show-chatbot')}>
         <span className="material-symbols-rounded">mode_comment</span>
         <span className="material-symbols-outlined">close</span>
@@ -133,7 +115,25 @@ const App = ({ token, config_id, base_url, party_id }) => {
             close
           </span>
         </header>
-        <ChatList />
+        {convo_comp ? (
+          <ConvoList config_id={config_id} all_users={null} logged_in_email={null} party_id={party_id} />
+        ) : isLoading ? (
+          <MutatingDots
+            visible={true}
+            height={100}
+            width={100}
+            color="#4fa94d"
+            secondaryColor="#4fa94d"
+            radius={12.5}
+            ariaLabel="mutating-dots-loading"
+          />
+        ) : (
+          <>
+            <Title>kredibot </Title>
+            {partyType !== 'BANK' ? <UserList /> : null}
+            <ChatList />
+          </>
+        )}
         <div className="chat-input">
           <textarea
             placeholder="Enter a message..."

@@ -42,6 +42,7 @@ body.show-chatbot .chatbot-toggler span:last-child {
 .chatbot {
   position: fixed;
   right: 26px;
+  height: 510px;
   bottom: 85px;
   width: 400px;
   background: #fff;
