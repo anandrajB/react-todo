@@ -38,7 +38,7 @@ const UserList = () => {
 
   return (
     <div>
-      <label>Select a Name:</label>
+      <label>Select a party:</label>
       <Select
         className="w-auto"
         showSearch
@@ -55,7 +55,7 @@ const UserList = () => {
         ))}
       </Select>
 
-      <label>Select a User:</label>
+      <label>Select users:</label>
       <Select className="w-100" mode="multiple" placeholder="Select User" value={selecteduser} onChange={selectUser}>
         {users.map((item, index) => (
           <Option key={index} value={item}>
