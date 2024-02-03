@@ -80,7 +80,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
   };
 
   return (
-    <div>
+    <div className='convo-list'>
       {isLoading ? (
         <MutatingDots
           visible={true}
@@ -93,10 +93,12 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
         />
       ) : (
         <>
+          <div className='convo-list-header'>
+            <span id='back-button' class="material-symbols-outlined" onClick={ConvoComponent}>
+              arrow_back_ios
+            </span>
+          </div>
 
-          <span id='back-button' class="material-symbols-outlined" onClick={ConvoComponent}>
-            arrow_back_ios
-          </span>
           <div>
             <button onClick={addpage}>more ..</button>
             {conversation && conversation.map((item, index) => <p key={index}>{item.text}</p>)}

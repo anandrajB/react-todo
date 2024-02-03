@@ -302,3 +302,52 @@ header h2 {
 #toggle:checked + svg #stars {
   opacity: 1;
 }
+
+
+.convo-list span {
+  color: #724ae8;
+  font-weight: bold;
+  font-size: larger;
+  border-radius: 50%;
+  padding: 10px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.convo-list span::before {
+  content: '';
+  display: block;
+  width: 30px; 
+  height: 30px; 
+  background-color: rgb(57, 42, 91); 
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1; 
+}
+
+
+
+
+
+.convo-list-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 2px;
+}
+
+
+
+
+
+.convo-list .convo-list-header{
+  background-color: rgb(193, 191, 200)
+}
+
+
