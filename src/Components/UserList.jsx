@@ -54,7 +54,6 @@ const UserList = () => {
           </Option>
         ))}
       </Select>
-
       <label>Select users:</label>
       <Select className="w-100" mode="multiple" placeholder="Select User" value={selecteduser} onChange={selectUser}>
         {users.map((item, index) => (

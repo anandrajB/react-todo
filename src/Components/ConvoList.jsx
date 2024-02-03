@@ -4,6 +4,7 @@ import { setConvoComp } from '../utils/slice';
 import { MessageReceiver, MessageSender } from '../utils/Messager';
 import { MutatingDots } from 'react-loader-spinner';
 import ChatSocket from '../utils/ChatSocket';
+import ChatInput from './ChatInput';
 
 const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
   const [inputValue, setInputValue] = useState('');
@@ -92,7 +93,10 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
         />
       ) : (
         <>
-          <button onClick={ConvoComponent}>Go back</button>
+
+          <span id='back-button' class="material-symbols-outlined" onClick={ConvoComponent}>
+            arrow_back_ios
+          </span>
           <div>
             <button onClick={addpage}>more ..</button>
             {conversation && conversation.map((item, index) => <p key={index}>{item.text}</p>)}
@@ -101,6 +105,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
                 <input type="text" name="name" value={inputValue} onChange={handleInputChange} />
               </label>
               <button type="submit">Send</button>
+              <ChatInput />
             </form>
           </div>
         </>

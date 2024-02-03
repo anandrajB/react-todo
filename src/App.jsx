@@ -66,9 +66,9 @@ const App = ({ token, config_id, base_url, party_id }) => {
   const [userMessage, setUserMessage] = useState('');
   const [inputInitHeight, setInputInitHeight] = useState(0);
 
-  useEffect(() => {
-    setInputInitHeight(document.querySelector('.chat-input textarea').scrollHeight);
-  }, []);
+  // useEffect(() => {
+  //   setInputInitHeight(document.querySelector('.chat-input textarea').scrollHeight);
+  // }, []);
 
   const createChatLi = (message, role) => {
     return {
@@ -190,19 +190,7 @@ const App = ({ token, config_id, base_url, party_id }) => {
             <ChatList />
           </>
         )}
-        <div className="chat-input">
-          <textarea
-            placeholder="Enter a message..."
-            spellCheck="false"
-            required
-            value={userMessage}
-            onChange={handleInputChange}
-            onKeyDown={handleKeyDown}
-          ></textarea>
-          <span id="send-btn" className="material-symbols-rounded" onClick={handleChat}>
-            send
-          </span>
-        </div>
+
       </div>
     </div>
   );
