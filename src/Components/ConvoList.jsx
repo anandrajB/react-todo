@@ -4,7 +4,6 @@ import { setConvoComp } from '../utils/slice';
 import { MessageReceiver, MessageSender } from '../utils/Messager';
 import { MutatingDots } from 'react-loader-spinner';
 import ChatSocket from '../utils/ChatSocket';
-import ChatInput from './ChatInput';
 
 const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
   const [inputValue, setInputValue] = useState('');
@@ -54,6 +53,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
 
   const send_message = async () => {
     const message_sender = MessageSender(config_id, chat_users, party_id, inputValue, email);
+    console.log(message_sender);
     await ChatSocket(email, message_sender);
   };
 
@@ -68,6 +68,8 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
     setShouldFetchConversation(true);
   };
 
+
+
   useEffect(() => {
     if (shouldFetchConversation) {
       fetchconversation();
@@ -75,9 +77,29 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
     }
   }, [shouldFetchConversation]);
 
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
+
+
+
+
+
+
+  const [inputInitHeight, setInputInitHeight] = useState(0);
+
+
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+    e.target.style.height = `${inputInitHeight}px`;
+    e.target.style.height = `${e.target.scrollHeight}px`;
   };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+    }
+  };
+
+
 
   return (
     <div className='convo-list'>
@@ -102,17 +124,25 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
           <div>
             <button onClick={addpage}>more ..</button>
             {conversation && conversation.map((item, index) => <p key={index}>{item.text}</p>)}
-            <form onSubmit={sendChat}>
-              <label>
-                <input type="text" name="name" value={inputValue} onChange={handleInputChange} />
-              </label>
-              <button type="submit">Send</button>
-              <ChatInput />
-            </form>
+
+            <div className="chat-input">
+              <textarea
+                placeholder="Enter a message..."
+                spellCheck="false"
+                required
+                value={inputValue}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyDown}
+              ></textarea>
+              <span id="send-btn" className="material-symbols-rounded" onClick={sendChat}>
+                send
+              </span>
+            </div>
           </div>
         </>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 
