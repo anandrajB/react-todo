@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <App
-      token="token 028485ef0a4a7d41f6e9b34cf0ea7d88682c8ec7"
+      token="token 89942315e488b75038bb7ae2a9064b87951b2f29"
       config_id="64ab94d14078dbac86787aed"
       base_url="finflo-test-v2-uikte.ondigitalocean.app"
       party_id="23"

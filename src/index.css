@@ -318,7 +318,19 @@ header h2 {
 }
 
 
-
+.text-message{
+  background-color: #f8eced;
+  margin-bottom: 10px;
+  width: 150px;
+  border-radius: 10px;
+  align-items: right;
+}
+.txt-msg-time {
+  font-size:  10px;
+}
+.txt-msg-div{
+  overflow: auto;
+}
 
 
 .convo-list .convo-list-header{

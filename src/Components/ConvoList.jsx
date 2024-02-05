@@ -29,6 +29,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
       const message_receiver = MessageReceiver(config_id, chat_users, currentPage);
       const baseData = await ChatSocket(email, message_receiver);
       setConversation(baseData?.data[0]?.message || null);
+      console.log('conversation:', conversation, email);
     } catch (error) {
       console.error('Error in fetchconversation:', error);
     }
@@ -53,7 +54,6 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
 
   const send_message = async () => {
     const message_sender = MessageSender(config_id, chat_users, party_id, inputValue, email);
-    console.log(message_sender);
     await ChatSocket(email, message_sender);
   };
 
@@ -123,7 +123,10 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
 
           <div>
             <button onClick={addpage}>more ..</button>
-            {conversation && conversation.map((item, index) => <p key={index}>{item.text}</p>)}
+
+            <div className='txt-msg-div'>
+              {conversation && conversation.map((item, index) => <div className='text-message' key={index}>{item.text} <p className='txt-msg-time'>{item.time}</p></div>)}
+            </div>
 
             <div className="chat-input">
               <textarea
