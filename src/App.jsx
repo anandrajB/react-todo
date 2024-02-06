@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addData, addEmail, addPartyType, addConvoList, setConfigId } from './utils/slice';
 import UserList from './Components/UserList';
 import ChatList from './Components/ChatList';
-import { MutatingDots } from 'react-loader-spinner';
+import { RotatingLines } from 'react-loader-spinner';
 import ChatlistData from './utils/Chatlist';
 import ConvoList from './Components/ConvoList';
 import { Typography } from 'antd';
@@ -47,7 +47,7 @@ const App = ({ token, config_id, base_url, party_id }) => {
       setPartyType(fetchedPartyType);
       setTimeout(() => {
         setIsLoading(false);
-      }, 2000);
+      }, 1000);
     } catch (error) {
       console.error('Error fetching email:', error);
     }
@@ -63,39 +63,11 @@ const App = ({ token, config_id, base_url, party_id }) => {
     }
   }, [convo_comp]);
 
-  const [userMessage, setUserMessage] = useState('');
-  const [inputInitHeight, setInputInitHeight] = useState(0);
 
-  // useEffect(() => {
-  //   setInputInitHeight(document.querySelector('.chat-input textarea').scrollHeight);
-  // }, []);
 
-  const createChatLi = (message, role) => {
-    return {
-      role,
-      content: message,
-    };
-  };
 
-  const handleChat = async () => {
-    const trimmedMessage = userMessage.trim();
-    if (!trimmedMessage) return;
-    console.log(userMessage)
-    setUserMessage('');
-  };
 
-  const handleInputChange = (e) => {
-    e.target.style.height = `${inputInitHeight}px`;
-    e.target.style.height = `${e.target.scrollHeight}px`;
-    setUserMessage(e.target.value);
-  };
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleChat();
-    }
-  };
 
   return (
     <div>
@@ -175,15 +147,19 @@ const App = ({ token, config_id, base_url, party_id }) => {
         {convo_comp ? (
           <ConvoList config_id={config_id} all_users={null} logged_in_email={null} party_id={party_id} />
         ) : isLoading ? (
-          <MutatingDots
-            visible={true}
-            height={100}
-            width={100}
-            color="#4fa94d"
-            secondaryColor="#4fa94d"
-            radius={12.5}
-            ariaLabel="mutating-dots-loading"
-          />
+          <div className='loader'>
+            < RotatingLines
+              visible={true}
+              height="50"
+              width="50"
+              color="grey"
+              strokeWidth="2"
+              animationDuration="0.10"
+              ariaLabel="rotating-lines-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          </div>
         ) : (
           <>
             {partyType !== 'BANK' ? <UserList /> : null}
@@ -195,5 +171,10 @@ const App = ({ token, config_id, base_url, party_id }) => {
     </div>
   );
 };
+
+
+
+
+
 
 export default App;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setConvoComp } from '../utils/slice';
 import { MessageReceiver, MessageSender } from '../utils/Messager';
-import { MutatingDots } from 'react-loader-spinner';
+import { RotatingLines } from 'react-loader-spinner';
 import ChatSocket from '../utils/ChatSocket';
 
 const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
@@ -38,7 +38,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 1000);
     fetchconversation();
   }, [currentPage]);
 
@@ -104,43 +104,60 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
   return (
     <div className='convo-list'>
       {isLoading ? (
-        <MutatingDots
-          visible={true}
-          height="100"
-          width="100"
-          color="#4fa94d"
-          secondaryColor="#4fa94d"
-          radius="12.5"
-          ariaLabel="mutating-dots-loading"
-        />
+        <div className='loader'>
+          < RotatingLines
+            visible={true}
+            height="50"
+            width="50"
+            color="grey"
+            strokeWidth="2"
+            animationDuration="0.10"
+            ariaLabel="rotating-lines-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div>
       ) : (
         <>
           <div className='convo-list-header'>
-            <span id='back-button' class="material-symbols-outlined" onClick={ConvoComponent}>
-              arrow_back_ios
+            <span id='back-button' className="material-symbols-outlined" onClick={ConvoComponent}>
+              arrow_back
             </span>
+
+            <button class="button-21" onClick={addpage} role="button">?</button>
           </div>
 
-          <div>
-            <button onClick={addpage}>more ..</button>
 
-            <div className='txt-msg-div'>
-              {conversation && conversation.map((item, index) => <div className='text-message' key={index}>{item.text} <p className='txt-msg-time'>{item.time}</p></div>)}
-            </div>
+          <div className='txt-msg-div'>
+            {conversation &&
+              conversation.map((item, index) => (
+                <div
+                  className={`text-message ${item.sender === email ? 'text-message-right' : 'text-message-left'
+                    }`}
+                  key={index}
+                >
 
-            <div className="chat-input">
-              <textarea
-                placeholder="Enter a message..."
-                spellCheck="false"
-                required
-                value={inputValue}
-                onChange={handleInputChange}
-                onKeyDown={handleKeyDown}
-              ></textarea>
-              <span id="send-btn" className="material-symbols-rounded" onClick={sendChat}>
-                send
-              </span>
-            </div>
+                  {item.text}
+                  {
+                    item.sender === email ? null : <p className='txt-msg-sender'>{item.sender}</p>
+                  }
+                  <p className='txt-msg-time'>{item.time}</p>
+                </div>
+              ))}
+          </div>
+
+          <div className="chat-input">
+            <textarea
+              placeholder="Enter a message..."
+              spellCheck="false"
+              required
+              value={inputValue}
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
+            ></textarea>
+            <span id="send-btn" className="material-symbols-rounded" onClick={sendChat}>
+              send
+            </span>
           </div>
         </>
       )
