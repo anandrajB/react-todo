@@ -30,7 +30,7 @@ const ChatList = () => {
         <ul>
           {data.map((item, index) => (
             <li key={index}>
-              <div className="list-item">
+              <div className="list-item" onClick={() => handleTitleClick(item)}>
                 <div className="item-content">
                   <div className='item-profile'>
                     <img style={{ borderRadius: 50, borderStyle: 'ridge' }} src={`https://api.dicebear.com/7.x/personas/svg?seed=${index}`} alt="avatar" />

@@ -13,6 +13,7 @@ import chatbotIcon from './assets/chatbot.png';
 const App = ({ token, config_id, base_url, party_id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [partyType, setPartyType] = useState(null);
+  const [messagecount, setmessagecount] = useState(0);
   const dispatch = useDispatch();
   const convo_comp = useSelector((state) => state.baseData['convo_comp']);
   const { Title } = Typography;
@@ -39,6 +40,7 @@ const App = ({ token, config_id, base_url, party_id }) => {
       });
 
       const convoListData = await ChatSocket(email, body);
+      setmessagecount(convoListData.unread_message)
       dispatch(addEmail(email));
       dispatch(addData(response));
       dispatch(addPartyType(fetchedPartyType));
@@ -66,15 +68,22 @@ const App = ({ token, config_id, base_url, party_id }) => {
 
 
 
+  const initial = () => {
+    document.body.classList.toggle('show-chatbot');
+    const messageCount = document.querySelector('.message-count');
+    messageCount.style.opacity = messageCount.style.opacity === '0' ? '1' : '0';
+  };
 
 
 
   return (
     <div>
 
-      <button className="chatbot-toggler" onClick={() => document.body.classList.toggle('show-chatbot')}>
+      <button className="chatbot-toggler" onClick={initial}>
         <span className="material-symbols-rounded">mode_comment</span>
+        <span className='message-count'>{messagecount}</span>
         <span className="material-symbols-outlined">close</span>
+
       </button>
       <div className="chatbot">
         <header>
