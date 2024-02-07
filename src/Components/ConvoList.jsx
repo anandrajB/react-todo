@@ -124,7 +124,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
               arrow_back
             </span>
 
-            <button class="button-21" onClick={addpage} role="button">?</button>
+            <button className="button-21" onClick={addpage} role="button">?</button>
           </div>
 
 

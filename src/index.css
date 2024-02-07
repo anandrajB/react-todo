@@ -103,7 +103,7 @@ header h2 {
 .chatbot .chatbox {
   overflow-y: auto;
   height: 450px;
-  padding: 30px 20px 100px;
+  padding: 10px 20px 100px;
 }
 .chatbot :where(.chatbox, textarea)::-webkit-scrollbar {
   width: 6px;
@@ -460,4 +460,67 @@ header h2 {
 
 .button-21:focus:not(:active) {
   box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
+}
+
+.item-content{
+  display: flex;
+  flex-direction: row;
+  transition: background-color 0.5s ease, border-radius 0.5s ease;
+  border-radius: 10px;
+}
+
+
+.item-content:hover{
+  background-color: rgb(219, 227, 227);
+  border-radius: 10px;
+}
+
+.item-profile{
+  width: 30px;
+  height: 30px;
+  margin-top: 15px;
+  margin-left: 13px;
+  margin-bottom: 11px;
+}
+
+.item-content-2{
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.user-gmail{
+  font-size: 14px;
+  font-weight: 100;
+}
+
+.chat-users-select{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin : 10px 0px 0px 20px;
+}
+
+.select-party{
+  margin-bottom: 15px;
+}
+
+
+
+.base-party-list{
+  width: 130px;
+  font-size : 10px
+}
+
+
+.base-user-list{
+  display: none;
+  
+}
+
+.user-list{
+  width: 150px;
+  margin-left: 5px;
+
 }

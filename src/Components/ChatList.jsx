@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Avatar, List } from 'antd';
-import ConvoList from './ConvoList';
 import { setChatUsers, setConfigId, setConvoComp } from '../utils/slice';
 
 const ChatList = () => {
@@ -34,9 +32,15 @@ const ChatList = () => {
             <li key={index}>
               <div className="list-item">
                 <div className="item-content">
-                  <img src={`https://api.dicebear.com/7.x/shapes/svg?seed=${index}`} alt="avatar" />
-                  <a onClick={() => handleTitleClick(item)}>{item.config_id}</a>
-                  <p>{item.members.map((email) => email.split('@')[0]).join(',')}</p>
+                  <div className='item-profile'>
+                    <img style={{ borderRadius: 50, borderStyle: 'ridge' }} src={`https://api.dicebear.com/7.x/personas/svg?seed=${index}`} alt="avatar" />
+
+                  </div>
+                  <div className='item-content-2'>
+                    <a style={{ paddingTop: 5, fontSize: 16, fontWeight: 500 }} onClick={() => handleTitleClick(item)}>{item.config_id}</a>
+                    <p className='user-gmail'>{item.members.map((email) => email.split('@')[0]).join(',')}</p>
+                  </div>
+
                 </div>
               </div>
             </li>

@@ -36,32 +36,39 @@ const UserList = () => {
     dispatch(setChatUsers([...selectedOptions, sender_email]));
   };
 
+  useEffect(() => { console.log(party) }
+    , [])
+
   return (
-    <div>
-      <label>Select a party:</label>
-      <Select
-        className="w-auto"
-        showSearch
-        value={party}
-        placeholder="Select Party"
-        optionFilterProp="children"
-        onChange={selectParty}
-        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-      >
-        {responsedata.map((item, index) => (
-          <Option key={index} value={item.name}>
-            {item.name}
-          </Option>
-        ))}
-      </Select>
-      <label>Select users:</label>
-      <Select className="w-100" mode="multiple" placeholder="Select User" value={selecteduser} onChange={selectUser}>
-        {users.map((item, index) => (
-          <Option key={index} value={item}>
-            {item}
-          </Option>
-        ))}
-      </Select>
+    <div className='chat-users-select'>
+      <div className='select-party'>
+        {/* <label>party</label> */}
+        <Select
+          className="base-party-list"
+          showSearch
+          value={party}
+          placeholder="Select Party"
+          optionFilterProp="children"
+          onChange={selectParty}
+          filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+        >
+          {responsedata.map((item, index) => (
+            <Option key={index} value={item.name}>
+              {item.name}
+            </Option>
+          ))}
+        </Select>
+      </div>
+      <div className='select-user'>
+        <Select className={party ? 'user-list' : 'base-user-list'} mode="multiple" placeholder="Select User" value={selecteduser} onChange={selectUser}>
+          {users.map((item, index) => (
+            <Option key={index} value={item}>
+              {item}
+            </Option>
+          ))}
+        </Select>
+      </div>
+
       <ChatButton shouldRenderButton={renderbutton} />
     </div>
   );
