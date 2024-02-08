@@ -183,6 +183,7 @@ const App = ({ token, config_id, base_url, party_id }) => {
         ) : (
           <>
             {partyType !== 'BANK' ? <UserList /> : null}
+            <hr class="solid"></hr>
             <ChatList />
           </>
         )}

@@ -85,13 +85,22 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
 
   const [inputInitHeight, setInputInitHeight] = useState(0);
 
-
+  // const txtmsgid = document.getElementById('text-msg-id');
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
     e.target.style.height = `${inputInitHeight}px`;
     e.target.style.height = `${e.target.scrollHeight}px`;
   };
+
+
+  // const some = () => {
+  //   txtmsgid.scrollTop = txtmsgid.scrollHeight;
+  // }
+
+  // useEffect(() => {
+  //   some()
+  // }, [])
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -128,7 +137,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
           </div>
 
 
-          <div className='txt-msg-div'>
+          <div className='txt-msg-div' >
             {conversation &&
               conversation.map((item, index) => (
                 <div
