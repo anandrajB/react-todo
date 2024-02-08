@@ -68,6 +68,16 @@ const App = ({ token, config_id, base_url, party_id }) => {
 
 
 
+  const darkmode = () => {
+    const chatBot = document.querySelector('.chatbot');
+    const computedStyle = window.getComputedStyle(chatBot);
+    const currentBgColor = computedStyle.backgroundColor;
+    chatBot.style.backgroundColor = currentBgColor === 'rgb(39, 53, 71)' ? '#fff' : '#273547';
+  };
+
+
+
+
   const initial = () => {
     document.body.classList.toggle('show-chatbot');
     const messageCount = document.querySelector('.message-count');
@@ -81,7 +91,8 @@ const App = ({ token, config_id, base_url, party_id }) => {
 
       <button className="chatbot-toggler" onClick={initial}>
         <span className="material-symbols-rounded">mode_comment</span>
-        <span className='message-count'>{messagecount}</span>
+        {messagecount != 0 ?
+          <span className='message-count'>{messagecount}</span> : null}
         <span className="material-symbols-outlined">close</span>
 
       </button>
@@ -89,8 +100,8 @@ const App = ({ token, config_id, base_url, party_id }) => {
         <header>
           <img className="kredibot-icon" src={chatbotIcon} alt="Chatbot Icon" />
           <h2>Kredibot</h2>
-          <label id="theme-toggle-button">
-            <input type="checkbox" id="toggle" />
+          <label id="theme-toggle-button" >
+            <input type="checkbox" id="toggle" onClick={darkmode} />
             <svg viewBox="0 0 69.667 44" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
               <g transform="translate(3.5 3.5)" data-name="Component 15 – 1" id="Component_15_1">
 

@@ -39,15 +39,22 @@ const ChatList = () => {
                   <div className='item-content-2'>
                     <a style={{ paddingTop: 5, fontSize: 16, fontWeight: 500 }} onClick={() => handleTitleClick(item)}>{item.config_id}</a>
                     <p className='user-gmail'>{item.members.map((email) => email.split('@')[0]).join(',')}</p>
+
                   </div>
+
+                  {
+                    item.unread_msgs != 0 ? <p className='unread-message'>{item.unread_msgs}</p> : null
+                  }
 
                 </div>
               </div>
             </li>
+
           ))}
         </ul>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 
