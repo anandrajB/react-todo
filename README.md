@@ -2,7 +2,7 @@
 
 A node SDK tailored for react applications enabling chatbot interface with banks and customers within the krediq ecosystem and enabling a end to end communication within parties . 
 
-<img src="chatlist.png" alt="Chat App Screenshot" height="600">   <img src="chatroom.png" alt="Chat App Screenshot" height="600">
+<img src="chatlist.png" alt="Chat App Screenshot" height="500">   <img src="chatroom.png" alt="Chat App Screenshot" height="500">
 
 
 
