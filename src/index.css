@@ -391,17 +391,17 @@ header h2 {
 }
 
 .text-message-left {
-  margin-left: 0px;
+  margin-left: -5px;
   background-color: #d4d4d4;
   padding: 10px;
   border-radius: 0px 10px 10px 10px;
-  width: 49%;
+  width: 63%;
 }
 
 .text-message-right {
-  margin-left: 175px;
+  margin-left: 130px;
   padding: 10px;
-  width: 49%;
+  width: auto;
   border-radius: 10px 0px 10px 10px;
 }
 
