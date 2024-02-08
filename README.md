@@ -16,7 +16,7 @@ A node SDK tailored for react applications enabling chatbot interface with banks
 
 - React
 - AntDesign
-
+- Vite
 
 
 ## Installation
@@ -25,8 +25,8 @@ To install and run the project locally, follow these steps:
 
 1. Clone the repo 
 2. Navigate to the project directory: `cd kredibot`
-
-```
+3. 
+```bash
 - npm install
 - npm run dev
 ```
