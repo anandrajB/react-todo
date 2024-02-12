@@ -12,6 +12,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [shouldFetchConversation, setShouldFetchConversation] = useState(true);
 
+
   const dispatch = useDispatch();
   let chat_users, email;
   if (all_users === null && logged_in_email === null) {
@@ -82,7 +83,6 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
 
 
 
-
   const [inputInitHeight, setInputInitHeight] = useState(0);
 
 
@@ -130,7 +130,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
           </div>
 
 
-          <div className='txt-msg-div' >
+          <div className='txt-msg-div'  >
             {conversation &&
               conversation.map((item, index) => (
                 <div
