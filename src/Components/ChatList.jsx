@@ -45,7 +45,7 @@ const ChatList = () => {
                   {
                     item.unread_msgs != 0 ? <p className='unread-message'>{item.unread_msgs}</p> : null
                   }
-
+                  
                 </div>
               </div>
             </li>
