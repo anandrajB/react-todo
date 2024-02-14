@@ -30,3 +30,11 @@ To install and run the project locally, follow these steps:
 - npm install
 - npm run dev
 ```
+
+- For integration 
+
+https://www.npmjs.com/package/kredibot
+
+```bash
+npm i kredibot
+```
