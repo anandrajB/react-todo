@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setConvoComp } from '../utils/slice';
 import { MessageReceiver, MessageSender } from '../utils/Messager';
@@ -11,7 +11,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
   const [conversation, setConversation] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [shouldFetchConversation, setShouldFetchConversation] = useState(true);
-
+  const bottomRef = useRef(null);
 
   const dispatch = useDispatch();
   let chat_users, email;
@@ -70,6 +70,38 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
 
 
 
+  useEffect(() => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollTop = bottomRef.current.scrollHeight;
+    }
+  }, []);
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      console.log("reaches the top")
+      const { scrollTop } = bottomRef.current;
+      console.log("reaches the top")
+      console.log(scrollTop)
+      if (scrollTop <= 10) {
+        console.log("reaches the top")
+      }
+    };
+
+    const currentRef = bottomRef.current;
+    if (currentRef) {
+      currentRef.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      if (currentRef) {
+        currentRef.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [bottomRef.current]);
+
+
+
 
 
   useEffect(() => {
@@ -77,6 +109,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
       fetchconversation();
       setShouldFetchConversation(false);
     }
+
   }, [shouldFetchConversation]);
 
 
@@ -92,6 +125,8 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
     e.target.style.height = `${inputInitHeight}px`;
     e.target.style.height = `${e.target.scrollHeight}px`;
   };
+
+
 
 
 
@@ -131,7 +166,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
           </div>
 
 
-          <div className='txt-msg-div'  >
+          <div className='txt-msg-div' ref={bottomRef} >
             {conversation &&
               conversation.map((item, index) => (
                 <div
