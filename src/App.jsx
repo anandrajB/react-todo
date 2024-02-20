@@ -6,7 +6,6 @@ import ChatList from './Components/ChatList';
 import { RotatingLines } from 'react-loader-spinner';
 import ChatlistData from './utils/Chatlist';
 import ConvoList from './Components/ConvoList';
-import { Typography } from 'antd';
 import ChatSocket from './utils/ChatSocket';
 import chatbotIcon from './assets/chatbot.png';
 
@@ -14,9 +13,11 @@ const App = ({ token, config_id, base_url, party_id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [partyType, setPartyType] = useState(null);
   const [messagecount, setmessagecount] = useState(0);
+  const [isActive, setIsActive] = useState(true);
   const dispatch = useDispatch();
   const convo_comp = useSelector((state) => state.baseData['convo_comp']);
-  const { Title } = Typography;
+
+
 
   const fetchData = async () => {
     try {
@@ -55,6 +56,50 @@ const App = ({ token, config_id, base_url, party_id }) => {
     }
   };
 
+
+  useEffect(() => {
+    let timeoutId;
+
+    const resetTimeout = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        const element = document.querySelector('.chatbot');
+        if (element) {
+          const computedStyle = window.getComputedStyle(element);
+          const opacity = computedStyle.getPropertyValue('opacity');
+          if (opacity === '1') {
+            initial()
+          }
+        }
+
+      }, 60000);
+    };
+
+    const handleActivity = () => {
+      if (!isActive) {
+        setIsActive(true);
+      }
+      resetTimeout();
+    };
+
+    const handleInactivity = () => {
+      setIsActive(false);
+    };
+
+    window.addEventListener('mousemove', handleActivity);
+    window.addEventListener('keydown', handleActivity);
+    window.addEventListener('scroll', handleActivity);
+
+    resetTimeout();
+
+    return () => {
+      window.removeEventListener('mousemove', handleActivity);
+      window.removeEventListener('keydown', handleActivity);
+      window.removeEventListener('scroll', handleActivity);
+      clearTimeout(timeoutId);
+    };
+  }, [isActive]);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -74,6 +119,9 @@ const App = ({ token, config_id, base_url, party_id }) => {
     const currentBgColor = computedStyle.backgroundColor;
     chatBot.style.backgroundColor = currentBgColor === 'rgb(39, 53, 71)' ? '#fff' : '#273547';
   };
+
+
+
 
 
 
