@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setChatUsers, setConfigId, setConvoComp } from '../utils/slice';
 
-const ChatButton = ({ shouldRenderButton, party, users }) => {
+const ChatButton = ({ shouldRenderButton, users }) => {
   const dispatch = useDispatch();
 
   const ConvComponent = () => {
@@ -10,7 +10,6 @@ const ChatButton = ({ shouldRenderButton, party, users }) => {
     dispatch(setConfigId(config_id));
     dispatch(setConvoComp(true));
     dispatch(setChatUsers(users));
-
   };
 
 

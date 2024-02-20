@@ -68,7 +68,7 @@ const UserList = () => {
         </Select>
       </div>
 
-      <ChatButton shouldRenderButton={renderbutton} party={party} users={selecteduser} />
+      <ChatButton shouldRenderButton={renderbutton} users={selecteduser} />
     </div>
   );
 };
