@@ -48,8 +48,6 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
     setCurretPage(currentPage + 1);
   };
 
-  const [PlaysendSound] = 'https://static.openreplay.com/tracker-assist/notification.mp3';
-
   const ConvoComponent = () => {
     dispatch(setConvoComp(false));
   };
