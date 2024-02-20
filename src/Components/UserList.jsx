@@ -36,8 +36,7 @@ const UserList = () => {
     dispatch(setChatUsers([...selectedOptions, sender_email]));
   };
 
-  useEffect(() => { console.log(party) }
-    , [])
+  console.log(selecteduser);
 
   return (
     <div className='chat-users-select'>
@@ -69,7 +68,7 @@ const UserList = () => {
         </Select>
       </div>
 
-      <ChatButton shouldRenderButton={renderbutton} />
+      <ChatButton shouldRenderButton={renderbutton} party={party} users={selecteduser} />
     </div>
   );
 };

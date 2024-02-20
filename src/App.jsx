@@ -100,9 +100,7 @@ const App = ({ token, config_id, base_url, party_id }) => {
     };
   }, [isActive]);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+
 
   useEffect(() => {
     if (!convo_comp) {

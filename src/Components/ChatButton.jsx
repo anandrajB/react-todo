@@ -1,13 +1,19 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setConvoComp } from '../utils/slice';
+import { setChatUsers, setConfigId, setConvoComp } from '../utils/slice';
 
-const ChatButton = ({ shouldRenderButton }) => {
+const ChatButton = ({ shouldRenderButton, party, users }) => {
   const dispatch = useDispatch();
 
   const ConvComponent = () => {
+    const config_id = '64be430ccac4e62378a1ae89';
+    dispatch(setConfigId(config_id));
     dispatch(setConvoComp(true));
+    dispatch(setChatUsers(users));
+
   };
+
+
 
   return (
     <div>

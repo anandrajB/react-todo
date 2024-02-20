@@ -31,6 +31,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
       const baseData = await ChatSocket(email, message_receiver);
       setConversation(baseData?.data[0]?.message || null);
       console.log('conversation:', conversation, email);
+
     } catch (error) {
       console.error('Error in fetchconversation:', error);
     }
@@ -68,6 +69,8 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
     setInputValue('');
     setShouldFetchConversation(true);
   };
+
+
 
 
 

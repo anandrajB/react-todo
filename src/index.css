@@ -373,7 +373,6 @@ header h2 {
   transition: scroll-behaviour 0.5s ease-in-out;
   scroll-behavior: smooth;
   flex-direction: column;
-  position: absolute;
 }
 
 
