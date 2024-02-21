@@ -68,9 +68,16 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
     setShouldFetchConversation(true);
   };
 
+  useEffect(() => {
+    if (shouldFetchConversation) {
+      fetchconversation();
+      setShouldFetchConversation(false);
+    }
 
+  }, [shouldFetchConversation]);
 
   useEffect(() => {
+    console.log("the test is ", bottomRef.current)
     if (bottomRef.current) {
       bottomRef.current.scrollTop = bottomRef.current.scrollHeight;
     }
@@ -85,6 +92,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
       console.log(scrollTop)
       if (scrollTop <= 10) {
         console.log("reaches the top")
+        addpage()
       }
     };
 
@@ -104,13 +112,7 @@ const ConvoList = ({ config_id, all_users, logged_in_email, party_id }) => {
 
 
 
-  useEffect(() => {
-    if (shouldFetchConversation) {
-      fetchconversation();
-      setShouldFetchConversation(false);
-    }
 
-  }, [shouldFetchConversation]);
 
 
 

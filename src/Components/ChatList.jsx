@@ -41,9 +41,9 @@ const ChatList = () => {
                     <p className='user-gmail'>{item.members.map((email) => email.split('@')[0]).join(',')}</p>
 
                   </div>
-                  <div class="dropdown">
-                    <button class="dropbtn">&#8226;&#8226;&#8226;</button>
-                    <div class="dropdown-content">
+                  <div className="dropdown">
+                    <button className="dropbtn">&#8226;&#8226;&#8226;</button>
+                    <div className="dropdown-content">
                       <a href="#">Mark as read</a>
                       <a href="#">Delete</a>
                     </div>
