@@ -133,7 +133,6 @@ header h2 {
   background-color: rgb(238, 239, 241);
   border-radius: 10px;
   margin-bottom: 10px;
-  cursor: pointer;
 }
 .chatbox img{
     width: 30px; 
@@ -437,8 +436,8 @@ header h2 {
 }
 
 
-/* CSS */
-.button-21 {
+
+.base-button {
   align-items: center;
   margin-right: 10px;
   appearance: none;
@@ -469,16 +468,16 @@ header h2 {
   white-space: nowrap;
 }
 
-.button-21:active,
-.button-21:focus {
+.base-button:active,
+.base-button:focus {
   outline: none;
 }
 
-.button-21:hover {
+.base-button:hover {
   background-position: -20px -20px;
 }
 
-.button-21:focus:not(:active) {
+.base-button:focus:not(:active) {
   box-shadow: rgba(40, 170, 255, 0.25) 0 0 0 .125em;
 }
 
@@ -543,4 +542,53 @@ header h2 {
   width: 150px;
   margin-left: 5px;
 
+}
+
+
+
+
+
+.dropbtn {
+  background-color: transparent;
+  border: none;
+  font-size: 10px;
+  margin-top: 18px;
+  margin-left: 13px;
+  transform: rotate(90deg);
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  margin-top: 9px;
+  width: 81px;
+  height: 58px;
+  border-radius: 13px;
+  font-size: 10px;
+  margin-left: -52px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 7px 7px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }

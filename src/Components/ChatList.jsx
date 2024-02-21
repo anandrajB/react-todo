@@ -30,7 +30,7 @@ const ChatList = () => {
         <ul>
           {data.map((item, index) => (
             <li key={index}>
-              <div className="list-item" onClick={() => handleTitleClick(item)}>
+              <div className="list-item">
                 <div className="item-content">
                   <div className='item-profile'>
                     <img style={{ borderRadius: 50, borderStyle: 'ridge' }} src={`https://api.dicebear.com/7.x/personas/svg?seed=${index}`} alt="avatar" />
@@ -41,11 +41,18 @@ const ChatList = () => {
                     <p className='user-gmail'>{item.members.map((email) => email.split('@')[0]).join(',')}</p>
 
                   </div>
+                  <div class="dropdown">
+                    <button class="dropbtn">&#8226;&#8226;&#8226;</button>
+                    <div class="dropdown-content">
+                      <a href="#">Mark as read</a>
+                      <a href="#">Delete</a>
+                    </div>
+                  </div>
 
                   {
                     item.unread_msgs != 0 ? <p className='unread-message'>{item.unread_msgs}</p> : null
                   }
-                  
+
                 </div>
               </div>
             </li>

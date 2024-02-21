@@ -19,7 +19,7 @@ const ChatButton = ({ shouldRenderButton, users }) => {
       {shouldRenderButton ? (
         <button
           type="button"
-          className="button-21"
+          className="base-button"
           style={{ marginLeft: 10, marginTop: 4 }}
           onClick={ConvComponent}
         >
