@@ -2,7 +2,7 @@ name: CI + CD
 
 on:
   push:
-    branches: [ main-v1.0.1 ]
+    branches: [ main-v1.0.5 ]
   workflow_dispatch:
 
 
